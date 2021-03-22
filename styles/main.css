@@ -1,0 +1,28 @@
+html,body{
+    margin:0;
+    height:100%;
+    overflow: hidden;
+}
+.containerNav{
+        /* margin-left:20px; */
+        margin-bottom:20px; 
+        
+
+}
+h1{ 
+
+    margin-left:10px!important;
+    margin-top:5px!important;
+    color:white!important;
+}
+
+.bottom-nav{
+    position:fixed!important;
+    bottom: 0!important;
+    width:100%;
+    background-color:black;
+}
+/* .nav-right{
+    display:block;
+    margin-right:auto!important;
+} */
