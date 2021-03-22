@@ -1,10 +1,11 @@
+
+
 $(document).ready(function(){
-    console.log("hello");
     $("#loginButton").click(function(){
         var password =$("#loginPassword").val();
+        var email = $("#loginEmail").val();
         console.log(password);
+        console.log(email);
+
     });
 });
-// function saveLoginInformation(){
-//     var temp =$("#password").val();
-// };
