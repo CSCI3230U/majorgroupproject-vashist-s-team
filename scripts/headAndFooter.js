@@ -20,4 +20,8 @@ $(document).ready(function() {
 
     // Adding the top navbar to the page
     $('body').prepend(navbar);
+
+    
+
 });
+
