@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     // Loading the top navbar into a variable and editting the signup/logout
     // button, depending on the current page
-    let navbar = $('<div>').load('header.html', function() {
+    let navbar = $('<div>').load('headAndFooter.html', function() {
                     if (bodyID == "loginBody") {
                         $('#topNavButton').attr('href', '/signupPage.html');
                         $('#topNavButton').html("Sign Up");
