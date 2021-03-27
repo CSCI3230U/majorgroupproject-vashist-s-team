@@ -1,0 +1,22 @@
+{
+  "name": "majorgroupproject-vashist-s-team",
+  "version": "1.0.0",
+  "description": "Website builder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSCI3230U/majorgroupproject-vashist-s-team.git"
+  },
+  "author": "Saenthuran, Ryan, Vethushon, Vashist, Hummzie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CSCI3230U/majorgroupproject-vashist-s-team/issues"
+  },
+  "homepage": "https://github.com/CSCI3230U/majorgroupproject-vashist-s-team#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
