@@ -82,7 +82,7 @@
             </div>
             <div class="navbar-end">
                 <!-- write my code here!!! -->
-                    <div id="file-js-example" class="file has-name">
+                    <div id="file-js-example" class="file has-name" type="file">
                         <label class="file-label">
                             <input class="file-input" type="file" name="resume">
                             <span class="file-cta">
@@ -93,9 +93,9 @@
                                 Choose a file…
                                 </span>
                             </span>
-                            <!-- <span class="file-name">
+                            <span class="file-name">
                                 No file uploaded
-                            </span> -->
+                            </span>
                         </label>
                     </div>
             </div>
@@ -107,18 +107,38 @@
 </template>
 <script>
     // my js goes here
+    window.onload = function(){
     const fileInput = document.querySelector('#file-js-example input[type=file]');
+    // fileInput.onchange = () => {
+    //     if (fileInput.files.length > 0) {
+    //     const fileName = document.querySelector('#file-js-example .file-name');
+    //     fileName.textContent = fileInput.files[0].name;
+    //     }
+    //     console.log("new file selected:");
+    //     console.log(fileInput.files[0].name);
+
+        
+        
+    //     // $('#sample_div').load(fileInput.files[0].name); //takes the filename and loads it in the div tag
+    //     // console.log(fileInput);
+    // }}
+
     fileInput.onchange = () => {
         if (fileInput.files.length > 0) {
         const fileName = document.querySelector('#file-js-example .file-name');
         fileName.textContent = fileInput.files[0].name;
         }
+        const reader = new FileReader();
+        reader.onload = reading => console.log(reading.target.result);
+        reader.readAsText(fileInput.files[0]);
+        
         console.log("new file selected:");
         console.log(fileInput.files[0].name);
 
         // $('#sample_div').load(fileInput.files[0].name); //takes the filename and loads it in the div tag
         console.log(fileInput);
-    }
+    }}
+
 </script>
 <style lang ="scss">
 
