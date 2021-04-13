@@ -81,7 +81,7 @@ app.post('/signup', function(request,response){
 
 
 app.post('/login', function(request,response){
-    model.Info.find({email:request.body.email})
+    model.Info.find({email:request.body.email,password:request.body.password})
     .then((data) =>{
         console.log("It connected");
         response.json(data[0]['_id']);

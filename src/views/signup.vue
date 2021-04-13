@@ -98,17 +98,11 @@ export default{
                     }else if(response["data"]["password"]){
                         this.$refs.passwordError.innerText = response["data"]["error"];
                         console.log("hi1");
+                    }else{
+                    sessionStorage.setItem("token",response["data"]);
+                    this.$store.commit('setToken',response["data"]);
+                    this.$router.push('/homepage')
                     }
-                    console.log(response)
-                    
-                    // if(response["data"]=== false){
-                    //     console.log("An error occured");
-                    // }else{
-                    // console.log(response);
-                    // sessionStorage.setItem("token",response["data"]);
-                    // this.$store.commit('setToken',response["data"]);
-                    // this.$router.push('/homepage')
-                    // }
 
                 }, (error) =>{
                     console.log(error);
