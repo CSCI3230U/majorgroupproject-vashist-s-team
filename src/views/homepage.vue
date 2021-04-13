@@ -1,14 +1,6 @@
 <template>
     <div class="home">
         <body id="homepage">
-            <h1>This is a homepage!</h1>
-<!-- Top navbar dynamically loaded -->
-
-<!-- Middle login form -->
-
-
-
-
         </body>
     </div>
 </template>
@@ -21,4 +13,5 @@ export default{
 
 </script>
 <style lang ="scss">
+
 </style>
