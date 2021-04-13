@@ -1,0 +1,8 @@
+//https://headsigned.com/posts/importing-and-using-font-awesome-with-vue/
+//https://www.youtube.com/watch?v=9lcKFUzx5Ys
+@import "~bulma/bulma";
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid"; // fas
+@import "~@fortawesome/fontawesome-free/scss/regular"; // far
+@import "~@fortawesome/fontawesome-free/scss/brands"; // fab

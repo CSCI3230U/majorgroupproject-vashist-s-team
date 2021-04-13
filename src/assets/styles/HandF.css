@@ -1,0 +1,31 @@
+.bottom-nav{
+    position:fixed!important;
+    bottom: 0!important;
+    width:100%;
+    background-color:green;
+}
+
+.links{
+    color:white;
+
+}
+
+#yt:hover{
+    color:#e52d27;
+
+}
+
+#twit:hover{
+    color:#1DA1F2;
+
+}
+
+#FAQ:hover{
+    /* Needs to be changed to the website color */
+    color:white;
+
+}
+
+#faqNotif{
+    position:absolute!important;
+}
