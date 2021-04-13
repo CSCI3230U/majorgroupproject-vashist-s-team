@@ -2,7 +2,6 @@
 
 
 
-<body>
     <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
         <div class="navbar-brand">
                                
@@ -104,7 +103,6 @@
         </div>
     </nav>
 
-</body>
 
 </template>
 <script>
