@@ -3,7 +3,7 @@
         <div>
 
             <div class="box my-5 mx-4">
-                <div class="section is-large my-6">
+                <div class="section is-large my-6" id="import_box">
                 </div>
             </div>
         </div>    
