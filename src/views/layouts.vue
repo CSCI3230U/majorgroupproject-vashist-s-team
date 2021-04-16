@@ -106,28 +106,51 @@
 
 </template>
 <script>
- // my js goes here
-    window.onload = function(){
-    const fileInput = document.querySelector('#file-js input[type=file]');
-    fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-        const fileName = document.querySelector('#file-js .file-name');
-        fileName.textContent = fileInput.files[0].name;
-        }
-        const reader = new FileReader();
-
-        var test = (document.querySelector('#import_box'));
-        reader.onload = reading => test.outerHTML=(reading.target.result);
-
-        reader.readAsText(fileInput.files[0]);
+    // my js goes here
+    // window.onload = function(){
+    // const fileInput = document.querySelector('#file-js input[type=file]');
+ 
+    // fileInput.onchange = () => {
+    //     if (fileInput.files.length > 0) {
+    //     const fileName = document.querySelector('#file-js .file-name');
+    //     fileName.textContent = fileInput.files[0].name;
+    //     }
+    //     const reader = new FileReader();
+    //     var test = (document.querySelector('#import_box'));
+    //     reader.onload = reading => test.innerHTML=(reading.target.result);
+    //     reader.readAsText(fileInput.files[0]);
         
-        console.log("new file selected:");
-        console.log(fileInput.files[0].name);
-
-        test.innerHTML = fileInput;
-
+    //     console.log("new file selected:");
+    //     console.log(fileInput.files[0].name);
+    //     // test.innerHTML = fileInput;
+    //     }
+    // }
+  export default({
+      
+      mounted :function(){
+          this.importFile();
+      },
+      methods: {
+          importFile(){
+             const fileInput = document.querySelector('#file-js input[type=file]');
+             fileInput.onchange = () => {
+             if (fileInput.files.length > 0) {
+                 const fileName = document.querySelector('#file-js .file-name');
+                 fileName.textContent = fileInput.files[0].name;
+                 }
+            const reader = new FileReader();
+            var test = (document.querySelector('#import_box'));
+            reader.onload = reading => test.innerHTML=(reading.target.result);
+            reader.readAsText(fileInput.files[0]);
+            console.log("new file selected:");
+            console.log(fileInput.files[0].name);
+  
         }
-    }
+        }
+      }
+    
+  })
+   
 </script>
 <style lang ="scss">
 
