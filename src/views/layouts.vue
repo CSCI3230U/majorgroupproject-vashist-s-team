@@ -10,19 +10,19 @@
             <div class="navbar-start">
                 <div class="navbar-item has-dropdown is-hoverable ">
                     <a class="navbar-link">
-                        Link 1
+                        Add New...
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            Sublink 1
+                    <div id="new" class="navbar-dropdown">
+                        <a id="h1" value="header" class="navbar-item">
+                            Header
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
-                            Sublink 2
+                         <a id="p" value="paragraph" class="navbar-item">
+                            Paragraph
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
-                            Sublink 3
+                         <a id="a" value="link" class="navbar-item">
+                            Link
                         </a>                                              
                     </div>
                 </div>
@@ -125,6 +125,42 @@
     //     // test.innerHTML = fileInput;
     //     }
     // }
+
+    import jQuery from "jquery";
+    const $ = jQuery;
+    window.$ = $;
+
+    var count = 0;
+    var currentElement;
+
+    function addElement(tag, name, newID, currentElement) {
+        let element = document.createElement(tag);
+        element.innerHTML = `[New ${name} element created]`;
+        element.id = `${name}${newID}`;
+        if (currentElement) {
+            $(element).insertAfter(`#${currentElement}`);
+        }
+        else {
+            document.querySelector('#import_box').appendChild(element);
+        }
+    }
+
+    window.onload = function() {
+
+        // Adding the new element that was clicked
+        $('#new a').click(function() {
+            count++;
+            addElement($(this).attr('id'), $(this).attr('value'), count, currentElement);
+        });
+
+        $(document).on('click', '#import_box *', function() {
+            $('#import_box *').removeClass('current');
+            currentElement = $(this).attr('id');
+            $(this).addClass('current');
+        });
+    }
+
+
   export default({
       
       mounted :function(){
@@ -153,5 +189,24 @@
    
 </script>
 <style lang ="scss">
+
+#import_box h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#import_box *:hover {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#import_box * {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.current {
+    background: grey;
+}
 
 </style>
