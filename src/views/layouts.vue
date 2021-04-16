@@ -83,7 +83,8 @@
             <div class="navbar-end">
                     <div id="file-js" class="file has-name" type="file">
                         <label class="file-label">
-                            <input class="file-input" type="file" name="resume" >
+                            <input class="file-input" type="file" name="resume" method="import" >
+                           
                             <span class="file-cta">
                                 <span class="file-icon">
                                 <i class="fas fa-upload"></i>
@@ -95,6 +96,7 @@
                             <span class="file-name">
                                 No file uploaded
                             </span>
+                             
                         </label>
                     </div>
             </div>
@@ -105,27 +107,58 @@
 </template>
 <script>
     // my js goes here
-    window.onload = function(){
-    const fileInput = document.querySelector('#file-js input[type=file]');
-    fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-        const fileName = document.querySelector('#file-js .file-name');
-        fileName.textContent = fileInput.files[0].name;
-        }
-        const reader = new FileReader();
+    // window.onload = function(){
+    // const fileInput = document.querySelector('#file-js input[type=file]');
+ 
 
-        var test = (document.querySelector('#import_box'));
-        reader.onload = reading => test.innerHTML=(reading.target.result);
+    // fileInput.onchange = () => {
+    //     if (fileInput.files.length > 0) {
+    //     const fileName = document.querySelector('#file-js .file-name');
+    //     fileName.textContent = fileInput.files[0].name;
+    //     }
+    //     const reader = new FileReader();
 
-        reader.readAsText(fileInput.files[0]);
+    //     var test = (document.querySelector('#import_box'));
+    //     reader.onload = reading => test.innerHTML=(reading.target.result);
+
+    //     reader.readAsText(fileInput.files[0]);
         
-        console.log("new file selected:");
-        console.log(fileInput.files[0].name);
+    //     console.log("new file selected:");
+    //     console.log(fileInput.files[0].name);
 
-        // test.innerHTML = fileInput;
+    //     // test.innerHTML = fileInput;
+
+    //     }
+    // }
+
+  export default({
+      
+      mounted :function(){
+          this.importFile();
+      },
+      methods: {
+          importFile(){
+             const fileInput = document.querySelector('#file-js input[type=file]');
+             fileInput.onchange = () => {
+             if (fileInput.files.length > 0) {
+                 const fileName = document.querySelector('#file-js .file-name');
+                 fileName.textContent = fileInput.files[0].name;
+                 }
+            const reader = new FileReader();
+            var test = (document.querySelector('#import_box'));
+            reader.onload = reading => test.innerHTML=(reading.target.result);
+            reader.readAsText(fileInput.files[0]);
+            console.log("new file selected:");
+            console.log(fileInput.files[0].name);
+
+  
 
         }
-    }
+        }
+      }
+    
+  })
+   
 
 </script>
 <style lang ="scss">
