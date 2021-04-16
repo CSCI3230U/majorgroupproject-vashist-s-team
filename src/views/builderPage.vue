@@ -23,5 +23,7 @@
     /* background-color: red!important; */
     /* box-shadow:2rem!important; */
 }
-
+#import_box{
+    padding:0;
+}
 </style>

@@ -115,14 +115,14 @@
         const reader = new FileReader();
 
         var test = (document.querySelector('#import_box'));
-        reader.onload = reading => test.outerHTML=(reading.target.result);
+        reader.onload = reading => test.innerHTML=(reading.target.result);
 
         reader.readAsText(fileInput.files[0]);
         
         console.log("new file selected:");
         console.log(fileInput.files[0].name);
 
-        test.innerHTML = fileInput;
+        // test.innerHTML = fileInput;
 
         }
     }
