@@ -126,17 +126,29 @@
     //     }
     // }
 
+    // Importing jQuery
     import jQuery from "jquery";
     const $ = jQuery;
     window.$ = $;
 
+    // A count variable to keep track of all the elements added to the builder page
     var count = 0;
+
+    // A variable to keep track of the currently selected element
     var currentElement;
 
+    // A function that will append a new element to the building space, depending on
+    // the currently selected element and the type of element to be added
     function addElement(tag, name, newID, currentElement) {
+
+        // Creating the new element based on the tag that was passed to the function
         let element = document.createElement(tag);
         element.innerHTML = `[New ${name} element created]`;
         element.id = `${name}${newID}`;
+
+        // If there is an element currently selected, append the new element after
+        // the currently selected element. Otherwise, append the element to the
+        // bottom of the page
         if (currentElement) {
             $(element).insertAfter(`#${currentElement}`);
         }
@@ -147,16 +159,55 @@
 
     window.onload = function() {
 
-        // Adding the new element that was clicked
+        // Adding the new element that was clicked from the bulma navbar menu. If there
+        // is a current element selected, append the new element underneath the current
+        // element
         $('#new a').click(function() {
             count++;
             addElement($(this).attr('id'), $(this).attr('value'), count, currentElement);
         });
 
+        // When an element is clicked, set it to the current element
         $(document).on('click', '#import_box *', function() {
             $('#import_box *').removeClass('current');
             currentElement = $(this).attr('id');
             $(this).addClass('current');
+        });
+
+        // When an element in the builder is double-clicked, add a text field where the
+        // user can edit the inner-html of that element
+        $(document).on('dblclick', '#import_box *', function() {
+
+            // Checking to see if we already have a text area to prevent duplicate
+            // textareas from appearing
+            if ($(this).attr('id') != 'tempArea') {
+
+                // Hidding the current element
+                let currentElement = $(this);
+                currentElement.addClass('hidden');
+
+                // Adding a temporary textarea for editing
+                let tempTextArea = document.createElement('textarea');
+                tempTextArea.innerHTML = $(this).html();
+                tempTextArea.id = 'tempArea';
+                tempTextArea.className = "textarea has-fixed-size";
+
+                // Insert the temporary textarea for editing
+                $(tempTextArea).insertAfter($(this));
+
+                // If enter is pressed, display the current element with the value from
+                // the textarea, and remove the temporary textarea used for editing
+                $(tempTextArea).keypress(function(key) {
+                    let keyPressed = key.which;
+                    if (keyPressed == 13) {
+                        currentElement.html($(this).val());
+                        $(this).remove();
+                        currentElement.removeClass('hidden');
+                    } 
+                });
+            }
+
+            
         });
     }
 
@@ -201,12 +252,19 @@
 }
 
 #import_box * {
+    border: 1px solid transparent;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    word-wrap: break-word;
 }
 
 .current {
-    background: grey;
+    background: rgb(206, 206, 206);
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
 }
 
 </style>
