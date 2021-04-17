@@ -27,19 +27,19 @@
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
+                    <a id="new-image-link" class="navbar-link">
                         New Image...
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                    <div id="image" class="navbar-dropdown">
+                        <a id="small-image" class="navbar-item">
                             Small
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
+                        <a id="medium-image" class="navbar-item">
                             Medium
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
+                        <a id="large-image" class="navbar-item">
                             Large
                         </a>                                              
                     </div>
@@ -49,15 +49,15 @@
                         Text Align...
                     </a>
                     <div id="align" class="navbar-dropdown">
-                        <a id="left" class="navbar-item">
+                        <a id="align-left" class="navbar-item">
                             Left
                         </a>
                         <hr class="navbar-divider">
-                        <a id="centre" class="navbar-item">
+                        <a id="align-centre" class="navbar-item">
                             Centre
                         </a>
                         <hr class="navbar-divider">
-                        <a id="right" class="navbar-item">
+                        <a id="align-right" class="navbar-item">
                             Right
                         </a>                                              
                     </div>
@@ -157,6 +157,28 @@
         }
     }
 
+    // A function that will append a new image to the building space, depending on
+    // the currently selected element
+    function addImage(size, url, newID, currentElement) {
+
+        // Creating the new image based on the size that was passed to the function
+        let image = document.createElement('img');
+        image.src = url;
+        image.id = `image${newID}`;
+        image.className = `image ${size}`;
+
+        // If there is an element currently selected, append the image after the
+        // currently selected element. Otherwise, append the image to the bottom
+        // of the page
+        if (currentElement) {
+            $(image).insertAfter(`#${currentElement}`);
+        }
+        else {
+            document.querySelector('#import_box').appendChild(image);
+        }
+
+    }
+
     window.onload = function() {
 
         // Adding the new element that was clicked from the bulma navbar menu. If there
@@ -172,12 +194,13 @@
             $('#import_box *').removeClass('current');
             currentElement = $(this).attr('id');
             $(this).addClass('current');
+            console.log($(this));
         });
 
         // Align the selected element's text when one of the options under align is
         // selected in the builder navbar
         $('#align a').click(function() {
-            $(`#${currentElement}`).removeClass('right centre left');
+            $(`#${currentElement}`).removeClass('align-left align-centre align-right');
             $(`#${currentElement}`).addClass($(this).attr('id'));
         });
 
@@ -187,7 +210,7 @@
 
             // Checking to see if we already have a text area to prevent duplicate
             // textareas from appearing
-            if ($(this).attr('id') != 'tempArea') {
+            if ($(this).attr('id') != 'tempArea' && $(this).hasClass('image') == false) {
 
                 // Hidding the current element
                 let currentElement = $(this);
@@ -212,10 +235,55 @@
                         currentElement.removeClass('hidden');
                     } 
                 });
-            }
-
-            
+            } 
         });
+
+        // Adding a new image from the bulma navbar menu based on the selected size
+        $('#image a').click(function() {
+
+            // Checking to see if the element has already been clicked. If the element
+            // has been clicked, wait until the new photo is added to the builder page
+            if ($(this).hasClass('clicked') == false) {
+
+                // Adding a class to show that the element has been clicked
+                $(this).addClass('clicked');
+
+                // A variable to keep track of the original html in the bulma navbar menu
+                let currentHTML =  $(this).html();
+
+                // Expanding the bulma navbar "New Image..." link so the user can see the
+                // image url that they are entering
+                $('#new-image-link').addClass('expand-link');
+
+                // Adding a new input field inside the navbar item for the user to enter
+                // their image url
+                $(this).html('<input id="tempImgInput" class="input is-small" type="text" placeholder="Enter Image URL">');
+
+                // When enter is pressed, create the new image based on the selected size
+                $(this).keypress(function(key) {
+                    let keyPressed = key.which;
+                    if ((keyPressed == 13) && (typeof $(this).children().val() !== 'undefined')) {
+                        console.log($(this).children().val());
+                        let url = $(this).children().val();
+                        count++;
+                        addImage(currentHTML, url, count, currentElement);
+                        $('#new-image-link').removeClass('expand-link');
+                        $(this).html(currentHTML);
+                        $(this).removeClass('clicked');
+                    }
+                    else if (keyPressed == 13) {
+                        $('#new-image-link').removeClass('expand-link');
+                        $(this).html(currentHTML);
+                        $(this).removeClass('clicked');
+                    }
+                });
+
+                // Focusing on the input field
+                $('#tempImgInput').focus();
+            }
+        });
+
+
     }
 
 
@@ -265,25 +333,50 @@
     word-wrap: break-word;
 }
 
+
+/* The currently selected element */
 .current {
     background: rgb(206, 206, 206);
     border-radius: 5px;
 }
 
+/* This class hides an element when it is being edited*/
 .hidden {
     display: none;
 }
 
-.left {
+/* These classes are used to align text */
+.align-left {
     text-align: left;
 }
 
-.centre {
+.align-centre {
     text-align: center;
 }
 
-.right {
+.align-right {
     text-align: right;
+}
+
+/* This class is used to expand the navbar section when the user inputs a link */
+.expand-link {
+    width: 35rem;
+}
+
+/* These classes are used to size different images */
+.Small {
+    width: 33.33%;
+    height: auto;
+}
+
+.Medium {
+    width: 66.66%;
+    height: auto;
+}
+
+.Large {
+    width: 100%;
+    height: auto;
 }
 
 </style>
