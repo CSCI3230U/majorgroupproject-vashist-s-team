@@ -66,16 +66,16 @@
                     <a class="navbar-link">
                         Font...
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
+                    <div id="apply-font" class="navbar-dropdown">
+                        <a id="bold-font" class="navbar-item">
                             Bold
                         </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item">
+                        <a id="italic-font" class="navbar-item">
                             Italic
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
+                        <a id="underline-font" class="navbar-item">
                             Underline
                         </a>                                              
                     </div>
@@ -211,6 +211,16 @@
         $('#align a').click(function() {
             $(`#${currentElement}`).removeClass('align-left align-centre align-right');
             $(`#${currentElement}`).addClass($(this).attr('id'));
+        });
+
+        // Apply the specified font to the selected element
+        $('#apply-font a').click(function() {
+            if ($(`#${currentElement}`).hasClass($(this).attr('id'))) {
+                $(`#${currentElement}`).removeClass($(this).attr('id'));
+            }
+            else {
+                $(`#${currentElement}`).addClass($(this).attr('id'));
+            }
         });
 
         // When an element in the builder is double-clicked, add a text field where the
@@ -386,6 +396,19 @@
 .Large {
     width: 100%;
     height: auto;
+}
+
+/* These classes are used to change the font of an element */
+.bold-font {
+    font-weight: bold;
+}
+
+.italic-font {
+    font-style: italic;
+}
+
+.underline-font {
+    text-decoration: underline;
 }
 
 </style>
