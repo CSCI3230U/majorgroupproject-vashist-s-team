@@ -81,6 +81,7 @@
                     </div>
                 </div>
             </div>
+            <!-- uplaod button -->
              <div class="navbar-end">
                     <div id="file-js" class="file has-name" type="file">
                         <label class="file-label">
@@ -93,12 +94,36 @@
                                 Choose a file…
                                 </span>
                             </span>
-                            <span class="file-name">
+                            <!-- <span class="file-name">
                                 No file uploaded
-                            </span>
+                            </span> -->
                         </label>
                     </div>
+                    <!-- save button -->
+                     <div id="Exporting" class="file has-name" type="file">
+                        <label class="file-label">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span class="file-label">
+                                    Save
+                                </span>
+                            </span>
+                        </label>  
+                    </div>
             </div>
+            
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <!-- <p>Some text in the Modal..</p> -->
+                    <input type="text" id="usergiven_filename">
+                    <button type="save" id="save">saveed</button>
+                </div>
+            </div>
+            
 
         </div>
     </nav>
@@ -129,29 +154,98 @@
       
       mounted :function(){
           this.importFile();
+          this.test();
       },
       methods: {
           importFile(){
-             const fileInput = document.querySelector('#file-js input[type=file]');
-             fileInput.onchange = () => {
-             if (fileInput.files.length > 0) {
-                 const fileName = document.querySelector('#file-js .file-name');
-                 fileName.textContent = fileInput.files[0].name;
-                 }
-            const reader = new FileReader();
-            var test = (document.querySelector('#import_box'));
-            reader.onload = reading => test.innerHTML=(reading.target.result);
-            reader.readAsText(fileInput.files[0]);
-            console.log("new file selected:");
-            console.log(fileInput.files[0].name);
-  
-        }
+                const fileInput = document.querySelector('#file-js input[type=file]');
+                fileInput.onchange = () => {
+                    //  if (fileInput.files.length > 0) {
+                    //      const fileName = document.querySelector('#file-js .file-name');
+                    //      fileName.textContent = fileInput.files[0].name;
+                    //      }
+                    const reader = new FileReader();
+                    var test = (document.querySelector('#import_box'));
+                    reader.onload = reading => test.innerHTML=(reading.target.result);
+                    reader.readAsText(fileInput.files[0]);
+                    console.log("new file selected:");
+                    console.log(fileInput.files[0].name);
+                }
+            },
+        test(){
+            const testButton = document.querySelector('#Exporting');
+            testButton.onclick = () => {
+                var modal = document.getElementById("myModal");
+                var span = document.getElementsByClassName("close")[0];
+                // var fileName = document.getElementById("usergiven_filename");
+                var save = document.getElementById("save");
+                
+                modal.style.display = "block";
+
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                save.onclick = function(){
+                    
+                    const fileInput = document.querySelector("#import_box");
+                    var fileName = document.getElementById("usergiven_filename");
+                    // console.log(fileName.value);
+
+                    var button = document.createElement("a");
+                    button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
+                    button.setAttribute('download',fileName.value+".html");
+                    button.click();
+                    console.log(fileInput.innerHTML);
+                }
+                // const fileInput = document.querySelector("#import_box");
+                // var fileName = document.getElementById("usergiven_filename");
+                // var button = document.createElement("a");
+                // button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
+                // button.setAttribute('download',fileName+".html");
+                // button.click();
+                // console.log(fileInput.innerHTML);
+
+            }
         }
       }
-    
   })
    
 </script>
-<style lang ="scss">
+<style lang ="css">
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
