@@ -38,6 +38,7 @@ export default({
 }
 
 #import_box{
+    position: relative;
     padding:0;
 }
 
