@@ -64,19 +64,19 @@
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Link 4
+                        Font...
                     </a>
                     <div class="navbar-dropdown">
                         <a class="navbar-item">
-                            Sublink 41
+                            Bold
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                            Italic
                         </a>
                         <hr class="navbar-divider">
                          <a class="navbar-item">
-                            Sublink 42
-                        </a>
-                        <hr class="navbar-divider">
-                         <a class="navbar-item">
-                            Sublink 43
+                            Underline
                         </a>                                              
                     </div>
                 </div>
@@ -194,7 +194,16 @@
             $('#import_box *').removeClass('current');
             currentElement = $(this).attr('id');
             $(this).addClass('current');
-            console.log($(this));
+        });
+
+        // If the delete key (del) is pressed, delete the current element and
+        // set the current element to undefined
+        $(document).on('keyup', function(key) {
+            let keyPressed = key.which;
+            if (keyPressed == 46) {
+                $(`#${currentElement}`).remove();
+                currentElement = '';
+            }
         });
 
         // Align the selected element's text when one of the options under align is
