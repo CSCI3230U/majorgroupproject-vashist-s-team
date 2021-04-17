@@ -26,43 +26,43 @@
                         </a>                                              
                     </div>
                 </div>
-                                <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Link 2
+                        New Image...
                     </a>
                     <div class="navbar-dropdown">
                         <a class="navbar-item">
-                            Sublink 21
+                            Small
                         </a>
                         <hr class="navbar-divider">
                          <a class="navbar-item">
-                            Sublink 22
+                            Medium
                         </a>
                         <hr class="navbar-divider">
                          <a class="navbar-item">
-                            Sublink 23
+                            Large
                         </a>                                              
                     </div>
                 </div>
-                                <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
-                        Link 3
+                        Text Align...
                     </a>
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            Sublink 31
+                    <div id="align" class="navbar-dropdown">
+                        <a id="left" class="navbar-item">
+                            Left
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
-                            Sublink 32
+                        <a id="centre" class="navbar-item">
+                            Centre
                         </a>
                         <hr class="navbar-divider">
-                         <a class="navbar-item">
-                            Sublink 33
+                        <a id="right" class="navbar-item">
+                            Right
                         </a>                                              
                     </div>
                 </div>
-                                <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         Link 4
                     </a>
@@ -174,6 +174,13 @@
             $(this).addClass('current');
         });
 
+        // Align the selected element's text when one of the options under align is
+        // selected in the builder navbar
+        $('#align a').click(function() {
+            $(`#${currentElement}`).removeClass('right centre left');
+            $(`#${currentElement}`).addClass($(this).attr('id'));
+        });
+
         // When an element in the builder is double-clicked, add a text field where the
         // user can edit the inner-html of that element
         $(document).on('dblclick', '#import_box *', function() {
@@ -265,6 +272,18 @@
 
 .hidden {
     display: none;
+}
+
+.left {
+    text-align: left;
+}
+
+.centre {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
 }
 
 </style>
