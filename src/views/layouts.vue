@@ -80,6 +80,13 @@
                         </a>                                              
                     </div>
                 </div>
+                <div class = "pusher">
+                    <div class="buttons">
+                                <router-link to="/display" class="button is-light">Display</router-link>
+                              
+
+                            </div>
+                </div>
             </div>
             <!-- uplaod button -->
              <div class="navbar-end">
@@ -136,7 +143,8 @@
       mounted :function(){
           this.importFile();
           this.exportFile();
-      },
+          
+          },
       methods: {
           importFile(){
                 const fileInput = document.querySelector('#file-js input[type=file]');
