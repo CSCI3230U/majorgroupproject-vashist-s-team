@@ -18,8 +18,7 @@
             console.log("test1");
             // const fileInput = document.querySelector("#import_box");
             const display = document.querySelector("#displayBox");
-            console.log(this.$store.state.code);
-            // display.outerHTML =this.$store.state.code;
+            // console.log(this.$store.state.code);
             display.textContent = this.$store.state.code;
         }
     });

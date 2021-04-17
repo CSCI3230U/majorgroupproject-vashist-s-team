@@ -1,7 +1,5 @@
 <template>
 
-
-
     <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
         <div class="navbar-brand">
                                
@@ -26,7 +24,7 @@
                         </a>                                              
                     </div>
                 </div>
-                                <div class="navbar-item has-dropdown is-hoverable">
+                    <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         Link 2
                     </a>
@@ -62,7 +60,7 @@
                         </a>                                              
                     </div>
                 </div>
-                                <div class="navbar-item has-dropdown is-hoverable">
+                    <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
                         Link 4
                     </a>
@@ -80,18 +78,31 @@
                         </a>                                              
                     </div>
                 </div>
-                <div class = "pusher">
-                    <div class="buttons">
-                                <!-- <button class="button" id= "displayPage">Display</button> -->
-                                <router-link to="/display" class="button is-light" >Display</router-link>
-                              
-
-                            </div>
+                
+                <div class="buttons">
+                    <router-link to="/display" class="button is-light" >Display Code</router-link>
                 </div>
+  
             </div>
             <!-- uplaod button -->
              <div class="navbar-end">
-                    <div id="file-js" class="file has-name" type="file">
+                 <button class="button" v-on:click="updateSave()">Save</button>
+
+                 <!-- save button -->
+                     <div id="Exporting" class="file has-name" type="file">
+                        <label class="file-label">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                <span class="file-label">
+                                    Export
+                                </span>
+                            </span>
+                        </label>  
+                    </div>
+
+                    <div id="file-import" class="file has-name" type="file">
                         <label class="file-label">
                             <input class="file-input" type="file" name="resume" >
                             <span class="file-cta">
@@ -102,30 +113,13 @@
                                 Choose a file…
                                 </span>
                             </span>
-                            <!-- <span class="file-name">
-                                No file uploaded
-                            </span> -->
                         </label>
                     </div>
-                    <!-- save button -->
-                     <div id="Exporting" class="file has-name" type="file">
-                        <label class="file-label">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-download"></i>
-                                </span>
-                                <span class="file-label">
-                                    Save
-                                </span>
-                            </span>
-                        </label>  
-                    </div>
-                    <button class="button" v-on:click="updateSave()">ex</button>
+   
             </div>
             
             <div id="myModal" class="modal">
                 <div class="modal-content" id="content">
-                    <!-- <span class="close">&times;</span> -->
                     <input class="input" type="text" id="usergiven_filename">
                     <button class="button" type="save" id="save">Save</button>
                     <button class="button" id="cancel">Cancel</button>
@@ -144,21 +138,18 @@
       
       mounted :function(){
           this.importFile();
-          this.exportFile();
-        //   this.updateSave();
-      
+          this.exportFile();    
           
           },
       methods: {
           importFile(){
-                const fileInput = document.querySelector('#file-js input[type=file]');
+                const fileInput = document.querySelector('#file-import input[type=file]');
                 fileInput.onchange = () => {
                     const reader = new FileReader();
                     var test = (document.querySelector('#import_box'));
                   
                     reader.onload = reading => {
                         test.innerHTML=(reading.target.result);
-                        //test.append(reading.target.result);
                      console.log(reading.target.result);
                      }
                    
@@ -177,9 +168,6 @@
                 modal.setAttribute("class","modal is-active");
                 modal.style.display = "block";
 
-                // span.onclick = function() {
-                //     modal.style.display = "none";
-                // }
                 cancel.onclick = function(){
                     modal.style.display = "none";
                 }
@@ -228,6 +216,12 @@
 
 #content{
     margin-top:30%;
+}
 
+#file-import{
+    margin-right: 7px;  
+}
+#Exporting, .button{
+    margin-right: 7px;
 }
 </style>
