@@ -108,7 +108,9 @@ export default{
                 console.log("User logged out!");
                 sessionStorage.setItem("token",response["data"]);
                 this.$store.commit('setToken',response["data"]);
+                this.$store.commit('setCode'," ");
                 //route to homepag btw
+                this.$router.push("/homepage");
                 },
                 (error) =>{
                     console.log(error);

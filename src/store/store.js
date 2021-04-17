@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     token: sessionStorage.getItem('token'),
-    name: ''
+    name: '',
+    code: ''
   },
   mutations:{
     setToken(state,tokens){
@@ -12,6 +13,9 @@ export default createStore({
     },
     setName(state, names){
       state.name = names
+    },
+    setCode(state,codes){
+      state.code = codes
     }
 
   }

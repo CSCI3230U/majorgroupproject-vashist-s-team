@@ -82,7 +82,8 @@
                 </div>
                 <div class = "pusher">
                     <div class="buttons">
-                                <router-link to="/display" class="button is-light">Display</router-link>
+                                <!-- <button class="button" id= "displayPage">Display</button> -->
+                                <router-link to="/display" class="button is-light" >Display</router-link>
                               
 
                             </div>
@@ -119,6 +120,7 @@
                             </span>
                         </label>  
                     </div>
+                    <button class="button" v-on:click="updateSave()">ex</button>
             </div>
             
             <div id="myModal" class="modal">
@@ -143,6 +145,8 @@
       mounted :function(){
           this.importFile();
           this.exportFile();
+        //   this.updateSave();
+      
           
           },
       methods: {
@@ -151,9 +155,16 @@
                 fileInput.onchange = () => {
                     const reader = new FileReader();
                     var test = (document.querySelector('#import_box'));
-                    reader.onload = reading => test.innerHTML=(reading.target.result);
+                  
+                    reader.onload = reading => {
+                        test.innerHTML=(reading.target.result);
+                        //test.append(reading.target.result);
+                     console.log(reading.target.result);
+                     }
+                   
                     reader.readAsText(fileInput.files[0]);
                     console.log("new file selected:");
+                  
                     console.log(fileInput.files[0].name);
                 }
             },
@@ -177,7 +188,7 @@
                     const fileInput = document.querySelector("#import_box");
                     var fileName = document.getElementById("usergiven_filename");
                   
-
+                    console.log(fileInput.innerHTML);
                     var button = document.createElement("a");
                     button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
                     button.setAttribute('download',fileName.value+".html");
@@ -188,6 +199,13 @@
                 }
             
             }
+        },
+        updateSave(){
+           
+            console.log("testuing");
+            const fileInput = document.querySelector("#import_box");
+            this.$store.commit('setCode',fileInput.innerHTML);
+            
         }
       }
   })
