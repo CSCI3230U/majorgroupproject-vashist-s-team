@@ -179,8 +179,72 @@
             document.querySelector('#import_box').appendChild(image);
         }
     }
-    window.onload = function() {
-        // Adding the new element that was clicked from the bulma navbar menu. If there
+   
+    
+  export default({
+      
+      mounted :function(){
+          this.importFile();
+          this.exportFile(); 
+          this.features();   
+          
+          },
+      methods: {
+          importFile(){
+                const fileInput = document.querySelector('#file-import input[type=file]');
+                fileInput.onchange = () => {
+                    const reader = new FileReader();
+                    var test = (document.querySelector('#import_box'));
+                  
+                    reader.onload = reading => {
+                        test.innerHTML=(reading.target.result);
+                     console.log(reading.target.result);
+                     }
+                   
+                    reader.readAsText(fileInput.files[0]);
+                    console.log("new file selected:");
+                  
+                    console.log(fileInput.files[0].name);
+                }
+            },
+        exportFile(){
+            const testButton = document.querySelector('#Exporting');
+            testButton.onclick = () => {
+                var modal = document.getElementById("myModal");
+                var save = document.getElementById("save");
+                var cancel = document.getElementById("cancel");
+                modal.setAttribute("class","modal is-active");
+                modal.style.display = "block";
+
+                cancel.onclick = function(){
+                    modal.style.display = "none";
+                }
+                save.onclick = function(){
+                    
+                    const fileInput = document.querySelector("#import_box");
+                    var fileName = document.getElementById("usergiven_filename");
+                  
+                    console.log(fileInput.innerHTML);
+                    var button = document.createElement("a");
+                    button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
+                    button.setAttribute('download',fileName.value+".html");
+                    button.click();
+                    
+                    modal.style.display = "none";
+                   
+                }
+            
+            }
+        },
+        updateSave(){
+           
+            console.log("testuing");
+            const fileInput = document.querySelector("#import_box");
+            this.$store.commit('setCode',fileInput.innerHTML);
+            
+        },
+        features(){
+             // Adding the new element that was clicked from the bulma navbar menu. If there
         // is a current element selected, append the new element underneath the current
         // element
         $('#new a').click(function() {
@@ -282,68 +346,6 @@
                 $('#tempImgInput').focus();
             }
         });
-    }
-    
-  export default({
-      
-      mounted :function(){
-          this.importFile();
-          this.exportFile();    
-          
-          },
-      methods: {
-          importFile(){
-                const fileInput = document.querySelector('#file-import input[type=file]');
-                fileInput.onchange = () => {
-                    const reader = new FileReader();
-                    var test = (document.querySelector('#import_box'));
-                  
-                    reader.onload = reading => {
-                        test.innerHTML=(reading.target.result);
-                     console.log(reading.target.result);
-                     }
-                   
-                    reader.readAsText(fileInput.files[0]);
-                    console.log("new file selected:");
-                  
-                    console.log(fileInput.files[0].name);
-                }
-            },
-        exportFile(){
-            const testButton = document.querySelector('#Exporting');
-            testButton.onclick = () => {
-                var modal = document.getElementById("myModal");
-                var save = document.getElementById("save");
-                var cancel = document.getElementById("cancel");
-                modal.setAttribute("class","modal is-active");
-                modal.style.display = "block";
-
-                cancel.onclick = function(){
-                    modal.style.display = "none";
-                }
-                save.onclick = function(){
-                    
-                    const fileInput = document.querySelector("#import_box");
-                    var fileName = document.getElementById("usergiven_filename");
-                  
-                    console.log(fileInput.innerHTML);
-                    var button = document.createElement("a");
-                    button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
-                    button.setAttribute('download',fileName.value+".html");
-                    button.click();
-                    
-                    modal.style.display = "none";
-                   
-                }
-            
-            }
-        },
-        updateSave(){
-           
-            console.log("testuing");
-            const fileInput = document.querySelector("#import_box");
-            this.$store.commit('setCode',fileInput.innerHTML);
-            
         }
       }
   })
