@@ -79,6 +79,24 @@
                         </a>                                              
                     </div>
                 </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Plot...
+                    </a>
+                    <div id="apply-font" class="navbar-dropdown">
+                        <a id="bold-font" class="navbar-item">
+                            Bold
+                        </a>
+                        <hr class="navbar-divider">
+                        <a id="italic-font" class="navbar-item">
+                            Italic
+                        </a>
+                        <hr class="navbar-divider">
+                        <a id="underline-font" class="navbar-item">
+                            Underline
+                        </a>                                              
+                    </div>
+                </div>
 
                 <div class="buttons">
                     <router-link to="/display" class="button is-light" >Display Code</router-link>
@@ -136,6 +154,8 @@
 
 </template>
 <script>
+    // Importing Plotly
+    import Plotly from 'plotly.js/dist/plotly';
     // Importing jQuery
     import jQuery from "jquery";
     const $ = jQuery;
@@ -179,7 +199,33 @@
             document.querySelector('#import_box').appendChild(image);
         }
     }
-   
+
+    window.onload = function() {
+        // var trace1 = {
+        //     x: [1, 2, 3, 4],
+        //     y: [10, 15, 13, 17],
+        //     mode: 'markers',
+        //     type: 'scatter'
+        // };
+
+        // var trace2 = {
+        //     x: [2, 3, 4, 5],
+        //     y: [16, 5, 11, 9],
+        //     mode: 'lines',
+        //     type: 'scatter'
+        // };
+
+        var trace3 = {
+            x: [1, 2, 3, 4],
+            y: [12, 9, 15, 12],
+            mode: 'lines+markers',
+            type: 'scatter'
+        };
+
+        var data = [trace3];
+
+        Plotly.newPlot(document.querySelector('#import_box'), data);
+    }
     
   export default({
       
@@ -253,6 +299,7 @@
         });
         // When an element is clicked, set it to the current element
         $(document).on('click', '#import_box *', function() {
+            console.log("TEST")
             $('#import_box *').removeClass('current');
             currentElement = $(this).attr('id');
             $(this).addClass('current');
@@ -286,7 +333,9 @@
         $(document).on('dblclick', '#import_box *', function() {
             // Checking to see if we already have a text area to prevent duplicate
             // textareas from appearing
-            if ($(this).attr('id') != 'tempArea' && $(this).hasClass('image') == false) {
+            if ($(this).attr('id') != 'tempArea' && $(this).hasClass('image') == false
+                && $(this).hasClass('plotly') == false && $(this).is('svg') == false
+                && $(this).is('rect') == false) {
                 // Hidding the current element
                 let currentElement = $(this);
                 currentElement.addClass('hidden');
@@ -346,6 +395,12 @@
                 $('#tempImgInput').focus();
             }
         });
+
+        // Stuff here
+
+
+
+
         }
       }
   })
@@ -358,11 +413,11 @@
     font-size: 2em;
     font-weight: bold;
 }
-#import_box *:hover {
+#import_box h1:hover, #import_box p:hover, #import_box a:hover, #import_box img:hover {
     border: 1px solid black;
     border-radius: 5px;
 }
-#import_box * {
+#import_box h1, #import_box p, #import_box a, #import_box img {
     border: 1px solid transparent;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -414,8 +469,6 @@
 .underline-font {
     text-decoration: underline;
 }
-
-
 
 .modal {
   background-color: rgba(0, 0, 0, 0.4);
