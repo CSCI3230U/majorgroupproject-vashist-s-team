@@ -1,137 +1,140 @@
 <template>
+    <div v-if="navType()">                            
+        <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
+            <div class="navbar-brand">
+                                
+            </div>
+            <div id="navbarLinks" class="navbar-menu">
 
-    <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
-        <div class="navbar-brand">
-                               
-        </div>
-        <div id="navbarLinks" class="navbar-menu">
+                <div class="navbar-start">
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a class="navbar-link">
+                            Add New...
+                        </a>
+                        <div id="new" class="navbar-dropdown">
+                            <a id="h1" value="header" class="navbar-item">
+                                Header
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="p" value="paragraph" class="navbar-item">
+                                Paragraph
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="a" value="link" class="navbar-item">
+                                Link
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a id="new-image-link" class="navbar-link">
+                            New Image...
+                        </a>
+                        <div id="image" class="navbar-dropdown">
+                            <a id="small-image" class="navbar-item">
+                                Small
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="medium-image" class="navbar-item">
+                                Medium
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="large-image" class="navbar-item">
+                                Large
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Text Align...
+                        </a>
+                        <div id="align" class="navbar-dropdown">
+                            <a id="align-left" class="navbar-item">
+                                Left
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="align-centre" class="navbar-item">
+                                Centre
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="align-right" class="navbar-item">
+                                Right
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Font...
+                        </a>
+                        <div id="apply-font" class="navbar-dropdown">
+                            <a id="bold-font" class="navbar-item">
+                                Bold
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="italic-font" class="navbar-item">
+                                Italic
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="underline-font" class="navbar-item">
+                                Underline
+                            </a>                                              
+                        </div>
+                    </div>
 
-            <div class="navbar-start">
-                <div class="navbar-item has-dropdown is-hoverable ">
-                    <a class="navbar-link">
-                        Add New...
-                    </a>
-                    <div id="new" class="navbar-dropdown">
-                        <a id="h1" value="header" class="navbar-item">
-                            Header
-                        </a>
-                        <hr class="navbar-divider">
-                         <a id="p" value="paragraph" class="navbar-item">
-                            Paragraph
-                        </a>
-                        <hr class="navbar-divider">
-                         <a id="a" value="link" class="navbar-item">
-                            Link
-                        </a>                                              
+                    <div class="buttons">
+                        <router-link to="/display" class="button is-light" >Display Code</router-link>
                     </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a id="new-image-link" class="navbar-link">
-                        New Image...
-                    </a>
-                    <div id="image" class="navbar-dropdown">
-                        <a id="small-image" class="navbar-item">
-                            Small
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="medium-image" class="navbar-item">
-                            Medium
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="large-image" class="navbar-item">
-                            Large
-                        </a>                                              
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Text Align...
-                    </a>
-                    <div id="align" class="navbar-dropdown">
-                        <a id="align-left" class="navbar-item">
-                            Left
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="align-centre" class="navbar-item">
-                            Centre
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="align-right" class="navbar-item">
-                            Right
-                        </a>                                              
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Font...
-                    </a>
-                    <div id="apply-font" class="navbar-dropdown">
-                        <a id="bold-font" class="navbar-item">
-                            Bold
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="italic-font" class="navbar-item">
-                            Italic
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="underline-font" class="navbar-item">
-                            Underline
-                        </a>                                              
-                    </div>
+
                 </div>
 
-                <div class="buttons">
-                    <router-link to="/display" class="button is-light" >Display Code</router-link>
+                
+                <!-- uplaod button -->
+                <div class="navbar-end">
+                    <button class="button" v-on:click="updateSave()">Save</button>
+
+                    <!-- save button -->
+                        <div id="Exporting" class="file has-name" type="file">
+                            <label class="file-label">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Export
+                                    </span>
+                                </span>
+                            </label>  
+                        </div>
+
+                        <div id="file-import" class="file has-name" type="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume" >
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                    Choose a file…
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+    
                 </div>
+                
+                <div id="myModal" class="modal">
+                    <div class="modal-content" id="content">
+                        <input class="input" type="text" id="usergiven_filename">
+                        <button class="button" type="save" id="save">Save</button>
+                        <button class="button" id="cancel">Cancel</button>
+                    </div>
+                </div>
+                
 
             </div>
-
-            
-            <!-- uplaod button -->
-             <div class="navbar-end">
-                 <button class="button" v-on:click="updateSave()">Save</button>
-
-                 <!-- save button -->
-                     <div id="Exporting" class="file has-name" type="file">
-                        <label class="file-label">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-download"></i>
-                                </span>
-                                <span class="file-label">
-                                    Export
-                                </span>
-                            </span>
-                        </label>  
-                    </div>
-
-                    <div id="file-import" class="file has-name" type="file">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="resume" >
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                Choose a file…
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-   
-            </div>
-            
-            <div id="myModal" class="modal">
-                <div class="modal-content" id="content">
-                    <input class="input" type="text" id="usergiven_filename">
-                    <button class="button" type="save" id="save">Save</button>
-                    <button class="button" id="cancel">Cancel</button>
-                </div>
-            </div>
-            
-
-        </div>
-    </nav>
+        </nav>
+    </div>
+    <div v-else>
+    </div>
 
 
 </template>
@@ -346,6 +349,10 @@
                 $('#tempImgInput').focus();
             }
         });
+        },
+        navType(){
+            console.log(this.$store.state.navType)
+            return this.$store.state.navType;
         }
       }
   })
