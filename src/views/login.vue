@@ -78,7 +78,7 @@ export default{
                     }else{
                         sessionStorage.setItem("token",response["data"]);
                         this.$store.commit('setToken',response["data"]);
-                        this.$router.push('/homepage');
+                        this.$router.push('/builderPage');
 
                     }
 

@@ -7,7 +7,7 @@
       <HandF />
       <div v-if="userToken">
             <functionLayout/>
-            <builderPage/>
+            <!-- <builderPage/> -->
       </div>
       <router-view/>    
 
@@ -26,7 +26,7 @@
 
 import HandF from './components/HandF.vue'
 import functionLayout from './views/layouts.vue'
-import builderPage from './views/builderPage.vue'
+// import builderPage from './views/builderPage.vue'
 
 //Axios is used to keep track of times website has been visited
 import axios from 'axios'
@@ -42,7 +42,7 @@ export default {
           return this.$store.state.token;
       }
   },
-  components:{HandF, functionLayout,builderPage},
+  components:{HandF, functionLayout},
   name: 'App'
 }
 </script>
