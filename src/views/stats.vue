@@ -1,49 +1,72 @@
 // https://www.tutorialspoint.com/How-to-get-a-number-of-days-in-a-specified-month-using-JavaScript
 <template>
-    <div ref="selector">
-        <div class="select">
-            <select ref="Year">
-                <option>Year</option>
-                <option value="2021">2021</option>
-            </select>
+    <div class="columns is-centered">
+        <div class="column is-3">
+            <div class="box has-background-dark">
+                <div ref="selector">
+                    <div class="select mx-1">
+                        <select ref="Year">
+                            <option>Year</option>
+                            <option value="2021">2021</option>
+                        </select>
 
-        </div>
-        <div class="select">
-            <select ref="Month">
-                <option>Month</option>
-                <option value="1">Jan</option>
-                <option value="2">Feb</option>
-                <option value="3">Mar</option>
-                <option value="4">Apr</option>
-                <option value="5">May</option>
-                <option value="6">Jun</option>
-                <option value="7">Jul</option>
-                <option value="8">Aug</option>
-                <option value="9">Sep</option>
-                <option value="10">Oct</option>
-                <option value="11">Nov</option>
-                <option value="12">Dec</option>
-            </select>
+                    </div>
+                    <div class="select mx-2">
+                        <select ref="Month">
+                            <option>Month</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
 
-        </div>
-        <div class="select">
-            <select ref="Day">
-                <option>Day</option>
-                <option v-for="index in getDays()" v-bind:key="index" :value="index">{{index}}</option>
-            </select>
+                    </div>
+                    <div class="select mx-2">
+                        <select ref="Day">
+                            <option>Day</option>
+                            <option v-for="index in getDays()" v-bind:key="index" :value="index">{{index}}</option>
+                        </select>
 
+                    </div>
+                    <div class="button mx-1" v-on:click="submit()" >
+                        <span>
+                            Submit
+                        </span>
+                    </div>
+                    <p ref="errorMessage">
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="button" v-on:click="submit()" >
-            <span>
-                Submit
-            </span>
-        </div>
-        <p ref="errorMessage">
-        </p>
     </div>
-    <div class ="graph">
+    <div class ="columns">
+        <div class ="column is-1">
 
+        </div>
+        <div class ="column mx-5 is-5">
+            <div class ="graphVisitors">
+
+            </div>
+        </div>
+        <div class ="column is-1">
+
+        </div>
+        <div class ="column mx-5 is-5">
+            <div class ="graphTimespent">
+
+            </div>
+        </div>
     </div>
+
+
 </template>
 
 <script>
@@ -68,14 +91,14 @@ export default{
         d3.selectAll('svg').remove();
 
         const margin = 40;
-        const width = 500;
-        const height = 250;
-        const chartWidth = width - 2     * margin;
+        const width = 600;
+        const height = 500;
+        const chartWidth = width - 2 * margin;
         const chartHeight = height - 2 * margin;
         console.log(dict);
         const colourScale = d3.scaleLinear()
-                                .domain([0, 20])
-                                .range(['red', 'blue']);
+                                .domain([2,2])
+                                .range(['#00FF00','blue']);
         
         const xScale = d3.scaleBand() // discrete, bucket
                             .domain(dict.map((data) => data.Day))
@@ -83,10 +106,10 @@ export default{
                             .padding(0.3);
         
         const yScale = d3.scaleLinear()
-                            .domain([0, 100])
+                            .domain([0, 10000])
                             .range([chartHeight, 0]);
 
-        let svg = d3.select('.graph')
+        let svg = d3.select('.graphTimespent')
                         .append('svg')
                         
                             .attr('width', width)
@@ -101,14 +124,14 @@ export default{
         //Grade on x axis
         svg.append('text')
                 .attr('x', width / 2)
-                .attr('y', margin+255)
+                .attr('y', margin+455)
                 .attr('text-anchor', 'middle')
                 .text('Days');
 
         svg.append('text')
                 .attr('transform','rotate(-90)')
-                .attr('x', width-650) 
-                .attr('y', margin-29)
+                .attr('x', width-850) 
+                .attr('y', margin-35)
                 .attr('text-anchor', 'middle')
                 .text('Number of visitors');
 
@@ -151,14 +174,14 @@ export default{
         makeTimeSpentBarGraph(dict){
 
         const margin = 40;
-        const width = 500;
-        const height = 250;
+        const width = 600;
+        const height = 500;
         const chartWidth = width - 2     * margin;
         const chartHeight = height - 2 * margin;
         console.log(dict);
         const colourScale = d3.scaleLinear()
-                                .domain([0, 20])
-                                .range(['red', 'blue']);
+                                .domain([2,2])
+                                .range(['#00FF00','blue']);
         
         const xScale = d3.scaleBand() // discrete, bucket
                             .domain(dict.map((data) => data.Day))
@@ -166,10 +189,10 @@ export default{
                             .padding(0.3);
         
         const yScale = d3.scaleLinear()
-                            .domain([0, 100])
+                            .domain([0, 1000])
                             .range([chartHeight, 0]);
 
-        let svg = d3.select('.graph')
+        let svg = d3.select('.graphVisitors')
                         .append('svg')
                         
                             .attr('width', width)
@@ -184,13 +207,13 @@ export default{
         //Grade on x axis
         svg.append('text')
                 .attr('x', width / 2)
-                .attr('y', margin+255)
+                .attr('y', margin+455)
                 .attr('text-anchor', 'middle')
                 .text('Days');
 
         svg.append('text')
                 .attr('transform','rotate(-90)')
-                .attr('x', width-650) 
+                .attr('x', width-850) 
                 .attr('y', margin-29)
                 .attr('text-anchor', 'middle')
                 .text('Time Spent (Minutes)');
@@ -237,6 +260,8 @@ export default{
             return newDate;
         },
         submit(){
+            d3.selectAll('svg').remove();
+
             this.Year = this.$refs.Year.value;
             this.Month = this.$refs.Month.value;
             this.Day = this.$refs.Day.value;
@@ -282,5 +307,9 @@ export default{
 </script>
 
 <style scoped>
+
+.box{
+    border-radius:0px 0px 10px 10px!important;
+}
 
 </style>
