@@ -80,20 +80,20 @@
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Plot...
+                    <a id="new-chart-link" class="navbar-link">
+                        Charts...
                     </a>
-                    <div id="apply-font" class="navbar-dropdown">
-                        <a id="bold-font" class="navbar-item">
-                            Bold
+                    <div id="charts" class="navbar-dropdown">
+                        <a id="scatter-plot-2d" class="navbar-item">
+                            Scatter Plot (2D)
                         </a>
                         <hr class="navbar-divider">
-                        <a id="italic-font" class="navbar-item">
-                            Italic
+                        <a id="bar-chart" class="navbar-item">
+                            Bar Chart
                         </a>
                         <hr class="navbar-divider">
-                        <a id="underline-font" class="navbar-item">
-                            Underline
+                        <a id="scatter-plot-3d" class="navbar-item">
+                            Scatter Plot (3D)
                         </a>                                              
                     </div>
                 </div>
@@ -200,31 +200,73 @@
         }
     }
 
-    window.onload = function() {
-        // var trace1 = {
-        //     x: [1, 2, 3, 4],
-        //     y: [10, 15, 13, 17],
-        //     mode: 'markers',
-        //     type: 'scatter'
-        // };
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function add2DPlot(newTitle, xVals, yVals, currentElement) {
 
-        // var trace2 = {
-        //     x: [2, 3, 4, 5],
-        //     y: [16, 5, 11, 9],
-        //     mode: 'lines',
-        //     type: 'scatter'
-        // };
+        // Converting the x and y input values to arrays
+        var xArray = xVals.split(',').map(x => +x);
+        var yArray = yVals.split(',').map(x => +x);
 
-        var trace3 = {
-            x: [1, 2, 3, 4],
-            y: [12, 9, 15, 12],
-            mode: 'lines+markers',
+        // Using the new x and y arrays to map the data points
+        var datapoints = {
+            x: xArray,
+            y: yArray,
+            mode: 'markers',
             type: 'scatter'
         };
 
-        var data = [trace3];
+        // Setting the chart title
+        var layout = {
+            title: {
+                text: newTitle
+            }
+        };
 
-        Plotly.newPlot(document.querySelector('#import_box'), data);
+        // Setting a data variable which contains the data points, which will be used in the
+        // new plot generation
+        var data = [datapoints];
+
+        // Generating the new plot and adding it to the building space
+        if (currentElement) {
+            Plotly.newPlot(document.querySelector(`#import_box #${currentElement}`), data, layout);
+        }
+        else {
+            Plotly.newPlot(document.querySelector('#import_box'), data, layout);
+        }
+    }
+
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function addBarChart(newTitle, xVals, yVals, currentElement) {
+
+        // Converting the x and y input values to arrays
+        var xArray = xVals.split(',');
+        var yArray = yVals.split(',').map(x => +x);
+
+        // Using the new x and y arrays to create the data
+        var data = [
+            {
+                x: xArray,
+                y: yArray,
+                type: 'bar'
+            }
+        ];
+
+        // Setting the chart title
+        var layout = {
+            title: {
+                text: newTitle
+            }
+        };
+
+        // Generating the new plot and adding it to the building space
+        if (currentElement) {
+            Plotly.newPlot(document.querySelector(`#import_box #${currentElement}`), data, layout);
+        }
+        else {
+            Plotly.newPlot(document.querySelector('#import_box'), data, layout);
+        }
     }
     
   export default({
@@ -397,7 +439,83 @@
         });
 
         // Stuff here
+        $('#charts a').click(function() {
+            // Checking to see if the element has already been clicked. If the element
+            // has been clicked, wait until the new photo is added to the builder page
+            if ($(this).hasClass('clicked') == false) {
 
+                // Adding a class to show that the element has been clicked
+                $(this).addClass('clicked');
+
+                // A variable to keep track of the original html in the bulma navbar menu
+                let parentID = $(this).attr('id');
+                let currentHTML =  $(this).html();
+
+                // Expanding the bulma navbar "New Image..." link so the user can see the
+                // image url that they are entering
+                $('#new-chart-link').addClass('expand-link');
+
+                // 'Title: <input id="tempTitleInput" class="input is-small" type="text" placeholder="Enter Title">'
+                //  + 'x-values: <input id="tempXInput" class="input is-small" type="text" placeholder="Usage: [1, 2, 3, ...]">'
+                //  + 'y-values: <input id="tempYInput" class="input is-small" type="text" placeholder="Usage: [1, 2, 3, ...]">'
+
+                // Adding a new input field inside the navbar item for the user to enter
+                // their image url
+                $(this).html('');
+                $(this).append('Title: <input id="tempTitleInput" class="input is-small" type="text" placeholder="Enter Title">');
+                //$(this).append('<br />');
+                $(this).append('x-values: <input id="tempXInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+                //$(this).append('<br />');
+                $(this).append('y-values: <input id="tempYInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+
+                if (parentID == 'scatter-plot-3d') {
+                    $(this).append('z-values: <input id="tempZInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+                }
+
+                $(this).append('<button id="tempChartButton" class="button is-small">Generate</button>');
+
+                $(document).on('click', '#tempChartButton', function() {
+                    let title = $('#tempTitleInput').val()
+                    let x = $('#tempXInput').val();
+                    let y = $('#tempYInput').val();
+
+                    if (parentID == 'scatter-plot-2d') {
+                        console.log(y);
+                        add2DPlot(title, x, y, currentElement);
+                    }
+                    else if (parentID == 'bar-chart') {
+                        addBarChart(title, x, y, currentElement);
+                    }
+
+                    $('#new-image-link').removeClass('expand-link');
+                    $(`#${parentID}`).html(currentHTML);
+                    $(`#${parentID}`).removeClass('clicked');
+                });
+                
+                // When enter is pressed, create the new image based on the selected size
+                // $(this).keypress(function(key) {
+                //     let keyPressed = key.which;
+                //     if ((keyPressed == 13) && (typeof $(this).children().val() !== 'undefined')) {
+                //         console.log($(this).children().val());
+                //         let url = $(this).children().val();
+                //         count++;
+                //         addImage(currentHTML, url, count, currentElement);
+                //         $('#new-image-link').removeClass('expand-link');
+                //         $(this).html(currentHTML);
+                //         $(this).removeClass('clicked');
+                //     }
+                //     else if (keyPressed == 13) {
+                //         $('#new-image-link').removeClass('expand-link');
+                //         $(this).html(currentHTML);
+                //         $(this).removeClass('clicked');
+                //     }
+                // });
+
+
+
+
+            }
+        });
 
 
 
@@ -469,6 +587,7 @@
 .underline-font {
     text-decoration: underline;
 }
+
 
 .modal {
   background-color: rgba(0, 0, 0, 0.4);
