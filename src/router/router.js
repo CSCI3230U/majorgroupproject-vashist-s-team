@@ -3,9 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import signup from '../views/signup.vue'
 import login from '../views/login.vue'
 import builderPage from '../views/builderPage.vue'
-import homepage from '../views/homepage.vue'
+import homepage -from '../views/homepage.vue'
+import stats from '../views/stats.vue'
 import display from '../views/display.vue'
-// import builderpage from '../views/builderPage.vue'
 
 const routes = [
   {
@@ -36,6 +36,11 @@ const routes = [
     name: 'Homepage',
     component: homepage
 
+  },
+  {
+    path: '/stats',
+    name: 'Statistics',
+    component: stats
   }
 ]
 

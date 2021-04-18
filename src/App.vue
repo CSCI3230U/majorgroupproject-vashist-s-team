@@ -28,6 +28,14 @@ import HandF from './components/HandF.vue'
 import functionLayout from './views/layouts.vue'
 // import builderPage from './views/builderPage.vue'
 
+//Axios is used to keep track of times website has been visited
+import axios from 'axios'
+// import d3 from 'd3';
+axios.post('http://localhost:4000/traffic',{
+    visit: 1
+})
+
+
 export default {
     computed:{
       userToken(){

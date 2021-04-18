@@ -14,11 +14,14 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div v-if="userToken">
+                            <router-link to="/stats" class="button is-light mx-3">Statistics</router-link>
+
                             <div class="button" v-on:click="logout()">
-                                <!-- <router-link to="/logout" class="button is-light">Logout</router-link> -->
                                 Logout
                                 
                             </div>
+
+
                         </div>
                         <div v-else>
                             <div class="buttons">

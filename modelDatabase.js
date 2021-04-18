@@ -13,6 +13,7 @@ mongoose.connection.on('connected',() =>{
     console.log("Db is connected");
 })
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 let Schema = mongoose.Schema;
 const dbSchema = new Schema({
@@ -24,4 +25,17 @@ const dbSchema = new Schema({
 },{
     collection: 'userInfo'
 })
+
+const dbStats = new Schema({
+    year: Number,
+    day: Number,
+    month: Number,
+    timeSpent: Number,
+    visitors: Number
+
+},{
+    collection: 'dbStats'
+})
+
+module.exports.Stats = mongoose.model('dbStats', dbStats);
 module.exports.Info = mongoose.model('userInfo', dbSchema);
