@@ -1,14 +1,13 @@
 <template>
-    <body>
         <div>
+            <section class="hero has-background-link-light is-fullheight">
+                    <div class="box my-5 mx-4">
+                        <div class="section is-large my-6" id="import_box" >
 
-            <div class="box my-5 mx-4">
-                <div class="section is-large my-6" id="import_box" >
-                    
-                </div>
-            </div>
+                        </div>
+                    </div>
+            </section>
         </div>    
-    </body>
 </template>
 
 
@@ -24,6 +23,8 @@ export default({
     mounted(){
         const fileInput = document.querySelector("#import_box");
         fileInput.innerHTML= this.$store.state.code;
+        // eslint-disable-next-line no-unused-vars
+        this.$store.commit('setNavTrue');
     }
 });
 
