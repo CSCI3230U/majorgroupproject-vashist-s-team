@@ -1,40 +1,32 @@
 <template>
-    <body>
-        <div>
-
-            <div class="box my-5 mx-4">
-                <div class="section is-large my-6" id="displayBox">
-                    
-                </div>
-            </div>
-        </div>    
-    </body>
+  <!-- box to display the code in -->
+  <body>
+    <div>
+      <div class="box my-5 mx-4">
+        <div class="section is-large my-6" id="displayBox"></div>
+      </div>
+    </div>
+  </body>
 </template>
 
 
 <script>
-    export default({
-        mounted(){
-            console.log("test1");
-            // const fileInput = document.querySelector("#import_box");
-            const display = document.querySelector("#displayBox");
-            // console.log(this.$store.state.code);
-            display.textContent = this.$store.state.code;
-        }
-    });
-
+// the code from the builder page is displayed
+export default {
+  mounted() {
+    console.log("test1");
+    const display = document.querySelector("#displayBox");
+    display.textContent = this.$store.state.code;
+  },
+};
 </script>
 
 <style >
-.box{
-    width:98%;
-    /* background-color:blanchedalmond!important; */
-    /* background-color: red!important; */
-    /* box-shadow:2rem!important; */
+.box {
+  width: 98%;
 }
 
-#displayBox{
-    padding:0;
+#displayBox {
+  padding: 0;
 }
-
 </style>
