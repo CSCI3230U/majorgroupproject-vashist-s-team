@@ -150,6 +150,26 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a id="new-chart-link" class="navbar-link">
+                        Charts...
+                    </a>
+                    <div id="charts" class="navbar-dropdown">
+                        <a id="scatter-plot-2d" class="navbar-item">
+                            Scatter Plot (2D)
+                        </a>
+                        <hr class="navbar-divider">
+                        <a id="bar-chart" class="navbar-item">
+                            Bar Chart
+                        </a>
+                        <hr class="navbar-divider">
+                        <a id="scatter-plot-3d" class="navbar-item">
+                            Scatter Plot (3D)
+                        </a>                                              
+                    </div>
+                </div>
+
 
 
                     <div class="button is-dark">
@@ -190,6 +210,8 @@
 
 </template>
 <script>
+    // Importing Plotly
+    import Plotly from 'plotly.js/dist/plotly';
     // Importing jQuery
     import jQuery from "jquery";
     const $ = jQuery;
@@ -203,7 +225,9 @@
     function addElement(tag, name, newID, currentElement) {
         // Creating the new element based on the tag that was passed to the function
         let element = document.createElement(tag);
-        element.innerHTML = `[New ${name} element created]`;
+        if (tag != 'div') {
+            element.innerHTML = `[New ${name} element created]`;
+        }
         element.id = `${name}${newID}`;
         // If there is an element currently selected, append the new element after
         // the currently selected element. Otherwise, append the element to the
@@ -233,7 +257,119 @@
             document.querySelector('#import_box').appendChild(image);
         }
     }
-   
+
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function add2DPlot(newTitle, xVals, yVals, newID, currentElement) {
+
+        // Adding a new div for the chart
+        addElement('div', 'div', newID, currentElement);
+
+        // Converting the x and y input values to arrays
+        var xArray = xVals.split(',').map(x => +x);
+        var yArray = yVals.split(',').map(x => +x);
+
+        // Using the new x and y arrays to map the data points
+        var datapoints = {
+            x: xArray,
+            y: yArray,
+            mode: 'markers',
+            type: 'scatter'
+        };
+
+        // Setting the chart title
+        var layout = {
+            title: {
+                text: newTitle
+            }
+        };
+
+        // Setting a data variable which contains the data points, which will be used in the
+        // new plot generation
+        var data = [datapoints];
+
+        // Generating the new plot and adding it to the building space
+        Plotly.newPlot(document.querySelector(`#div${count}`), data, layout);
+    }
+
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function addBarChart(newTitle, xVals, yVals, newID, currentElement) {
+
+        // Adding a new div for the chart
+        addElement('div', 'div', newID, currentElement);
+
+        // Converting the x and y input values to arrays
+        var xArray = xVals.split(',');
+        var yArray = yVals.split(',').map(x => +x);
+
+        // Using the new x and y arrays to create the data
+        var data = [
+            {
+                x: xArray,
+                y: yArray,
+                type: 'bar'
+            }
+        ];
+
+        // Setting the chart title
+        var layout = {
+            title: {
+                text: newTitle
+            }
+        };
+
+        // Generating the new plot and adding it to the building space
+        Plotly.newPlot(document.querySelector(`#div${count}`), data, layout);
+    }
+
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function add3DPlot(newTitle, xVals, yVals, zVals, newID, currentElement) {
+
+        // Adding a new div for the chart
+        addElement('div', 'div', newID, currentElement);
+
+        // Converting the x, y and z input values to arrays
+        var xArray = xVals.split(',').map(x => +x);
+        var yArray = yVals.split(',').map(x => +x);
+        var zArray = zVals.split(',').map(x => +x);
+
+        // Using the new x and y arrays to map the data points
+        var datapoints = {
+            x: xArray,
+            y: yArray,
+            z: zArray,
+            mode: 'markers',
+            marker: {
+                size: 12,
+                line: {
+                    color: 'rgb(204, 204, 204)',
+                    width: 1
+                },
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        };
+
+        // Setting the chart title
+        var layout = {
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0
+            }
+        };
+
+        // Setting a data variable which contains the data points, which will be used in the
+        // new plot generation
+        var data = [datapoints];
+
+        // Generating the new plot and adding it to the building space
+        Plotly.newPlot(document.querySelector(`#div${count}`), data, layout);
+    }
+
     
   export default({
       
@@ -400,6 +536,7 @@
         });
         // When an element is clicked, set it to the current element
         $(document).on('click', '#import_box *', function() {
+            console.log("TEST")
             $('#import_box *').removeClass('current');
             currentElement = $(this).attr('id');
             $(this).addClass('current');
@@ -439,7 +576,9 @@
         $(document).on('dblclick', '#import_box *', function() {
             // Checking to see if we already have a text area to prevent duplicate
             // textareas from appearing
-            if ($(this).attr('id') != 'tempArea' && $(this).hasClass('image') == false) {
+            if ($(this).attr('id') != 'tempArea' && $(this).hasClass('image') == false
+                && $(this).hasClass('plotly') == false && $(this).is('svg') == false
+                && $(this).is('rect') == false) {
                 // Hidding the current element
                 let currentElement = $(this);
                 currentElement.addClass('hidden');
@@ -499,6 +638,77 @@
                 $('#tempImgInput').focus();
             }
         });
+
+        // Adding a new chart from the bulma navbar menu based on the selected chart
+        $('#charts a').click(function() {
+            // Checking to see if the element has already been clicked. If the element
+            // has been clicked, wait until the new photo is added to the builder page
+            if ($(this).hasClass('clicked') == false) {
+
+                // Adding a class to show that the element has been clicked
+                $(this).addClass('clicked wrap-text');
+
+                // A variable to keep track of the original html in the bulma navbar menu
+                let parentID = $(this).attr('id');
+                let currentHTML =  $(this).html();
+
+                // Expanding the bulma navbar "New Image..." link so the user can see the
+                // image url that they are entering
+                $('#new-chart-link').addClass('expand-link');
+
+                // Adding a new input field inside the navbar item for the user to enter
+                // their datapoints when they implement a chart
+                $(this).html('');
+
+                // Appending the title input field
+                if (parentID != 'scatter-plot-3d') {
+                    $(this).append('Title: <input id="tempTitleInput" class="input is-small" type="text" placeholder="Enter Title">');
+                }
+
+                // Appending the x and y input fields
+                $(this).append('x-values: <input id="tempXInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+                $(this).append('y-values: <input id="tempYInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+
+                // Appending the z input field if the user selects the 3D scatter plot
+                if (parentID == 'scatter-plot-3d') {
+                    $(this).append('z-values: <input id="tempZInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
+                }
+
+                // Appending the button that when clicked, will dynamically generate the chart
+                $(this).append('<button id="tempChartButton" class="button is-small">Generate</button>');
+
+                // When the dynamic button is clicked, call the function that will generate the corresponding chart
+                $(document).on('click', '#tempChartButton', function() {
+                    let title = $('#tempTitleInput').val()
+                    let x = $('#tempXInput').val();
+                    let y = $('#tempYInput').val();
+
+                    if (parentID == 'scatter-plot-2d') {
+                        count++;
+                        add2DPlot(title, x, y, count, currentElement);
+                    }
+                    else if (parentID == 'bar-chart') {
+                        count++;
+                        addBarChart(title, x, y, count, currentElement);
+                    }
+                    else if (parentID == 'scatter-plot-3d') {
+                        let z = $('#tempZInput').val();
+                        count++;
+                        add3DPlot(title, x, y, z, count, currentElement);
+                    }
+
+                    // Setting the navbar back to normal
+                    $('#new-chart-link').removeClass('expand-link');
+                    $(`#${parentID}`).html(currentHTML);
+                    $(`#${parentID}`).removeClass('clicked wrap-text');
+                });
+            }
+        });
+
+
+
+        }
+
         },
         mobilejs(){
             // import jQuery from "jquery";
@@ -523,11 +733,11 @@
     font-size: 2em;
     font-weight: bold;
 }
-#import_box *:hover {
+#import_box h1:hover, #import_box p:hover, #import_box a:hover, #import_box img:hover {
     border: 1px solid black;
     border-radius: 5px;
 }
-#import_box * {
+#import_box h1, #import_box p, #import_box a, #import_box img {
     border: 1px solid transparent;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -580,6 +790,10 @@
     text-decoration: underline;
 }
 
+/* This class is used to allow multiple lines in a navbar item */
+.wrap-text {
+    flex-wrap: wrap;
+}
 
 
 .modal {
