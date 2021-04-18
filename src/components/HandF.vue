@@ -14,9 +14,10 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div v-if="userToken">
-                            <router-link to="/stats" class="button is-light mx-3">Statistics</router-link>
+                            <router-link to="/stats" class="button is-dark mx-3" v-on:click="updateSave(); removeNav()">Statistics</router-link>
+                            <router-link to="/builderPage" class="button is-dark mx-3" v-on:click="addNav()">Builder Page</router-link>
 
-                            <div class="button" v-on:click="logout()">
+                            <div class="button is-danger" v-on:click="logout()">
                                 Logout
                                 
                             </div>
@@ -118,7 +119,22 @@ export default{
                 (error) =>{
                     console.log(error);
                 });
-        }
+        },
+        updateSave(){
+            const fileInput = document.querySelector("#import_box");
+            this.$store.commit('setCode',fileInput.innerHTML);
+        },
+         removeNav(){
+            console.log("remving")
+            sessionStorage.setItem("type",false);
+
+            this.$store.commit('setNavFalse',false);
+        },
+        addNav(){
+            console.log("adding")
+            sessionStorage.setItem("type",true);
+            this.$store.commit('setNavTrue',true);
+        }         
 
                     
     },

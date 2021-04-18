@@ -100,6 +100,9 @@ export default{
                         console.log("hi1");
                     }else{
                     sessionStorage.setItem("token",response["data"]);
+                    this.$store.commit('setNavTrue');
+                    this.$store.commit('setToken',response["data"]);
+                     
                     this.$store.commit('setToken',response["data"]);
                     this.$router.push('/homepage')
                     }

@@ -1,82 +1,154 @@
 <template>
+    <div v-show="navType">
+        <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>                               
+            </div>
+            <div id="navbarLinks" class="navbar-menu">
 
-    <nav class="navbar is-dark" role="navigation" aria-label= "main navigation">
-        <div class="navbar-brand">
-                               
-        </div>
-        <div id="navbarLinks" class="navbar-menu">
+                <div class="navbar-start">
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a class="navbar-link">
+                            Add New...
+                        </a>
+                        <div id="new" class="navbar-dropdown">
+                            <a id="h1" value="header" class="navbar-item">
+                                Header
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="p" value="paragraph" class="navbar-item">
+                                Paragraph
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="a" value="link" class="navbar-item">
+                                Link
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a id="new-image-link" class="navbar-link">
+                            New Image...
+                        </a>
+                        <div id="image" class="navbar-dropdown">
+                            <a id="small-image" class="navbar-item">
+                                Small
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="medium-image" class="navbar-item">
+                                Medium
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="large-image" class="navbar-item">
+                                Large
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Text Align...
+                        </a>
+                        <div id="align" class="navbar-dropdown">
+                            <a id="align-left" class="navbar-item">
+                                Left
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="align-centre" class="navbar-item">
+                                Centre
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="align-right" class="navbar-item">
+                                Right
+                            </a>                                              
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Font...
+                        </a>
+                        <div id="apply-font" class="navbar-dropdown">
+                            <a id="bold-font" class="navbar-item">
+                                Bold
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="italic-font" class="navbar-item">
+                                Italic
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="underline-font" class="navbar-item">
+                                Underline
+                            </a>                                              
+                        </div>
+                    </div>
 
-            <div class="navbar-start">
-                <div class="navbar-item has-dropdown is-hoverable ">
-                    <a class="navbar-link">
-                        Add New...
-                    </a>
-                    <div id="new" class="navbar-dropdown">
-                        <a id="h1" value="header" class="navbar-item">
-                            Header
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a class="navbar-link">
+                            Color Selector
                         </a>
-                        <hr class="navbar-divider">
-                         <a id="p" value="paragraph" class="navbar-item">
-                            Paragraph
-                        </a>
-                        <hr class="navbar-divider">
-                         <a id="a" value="link" class="navbar-item">
-                            Link
-                        </a>                                              
+                        <div id="new" class="navbar-dropdown">
+                            <input type="color" id='Colorchanger' class="input" >                                           
+                        </div>
                     </div>
+
+                    
+
                 </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a id="new-image-link" class="navbar-link">
-                        New Image...
-                    </a>
-                    <div id="image" class="navbar-dropdown">
-                        <a id="small-image" class="navbar-item">
-                            Small
+
+                
+                <!-- uplaod button -->
+                <div class="navbar-end">
+
+
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a class="navbar-link">
+                            File
                         </a>
-                        <hr class="navbar-divider">
-                        <a id="medium-image" class="navbar-item">
-                            Medium
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="large-image" class="navbar-item">
-                            Large
-                        </a>                                              
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Text Align...
-                    </a>
-                    <div id="align" class="navbar-dropdown">
-                        <a id="align-left" class="navbar-item">
-                            Left
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="align-centre" class="navbar-item">
-                            Centre
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="align-right" class="navbar-item">
-                            Right
-                        </a>                                              
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">
-                        Font...
-                    </a>
-                    <div id="apply-font" class="navbar-dropdown">
-                        <a id="bold-font" class="navbar-item">
-                            Bold
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="italic-font" class="navbar-item">
-                            Italic
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="underline-font" class="navbar-item">
-                            Underline
-                        </a>                                              
+
+                        <div id="new" class="navbar-dropdown ">
+
+                            <div class = "navbar-item">
+                                <div id="NewFile" class="file is-white" type="file">
+                                    <label class="file-label">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-file"></i>
+                                            </span>
+                                            <span class="file-label">New File</span>
+                                        </span>
+                                    </label>  
+                                </div> 
+                            </div>
+
+                            <div class = "navbar-item">
+                                <div id="Exporting" class="file is-white" type="file">
+                                    <label class="file-label">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-download"></i>
+                                            </span>
+                                            <span class="file-label">Export</span>
+                                        </span>
+                                    </label>  
+                                </div> 
+                            </div> 
+
+                            <div class= "navbar-item">
+                                <div id="file-import" class="file is-white" type="file">
+                                    <label class="file-label">
+                                        <input class="file-input" type="file" name="resume" >
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">Choose a file…</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -98,59 +170,43 @@
                     </div>
                 </div>
 
-                <div class="buttons">
-                    <router-link to="/display" class="button is-light" >Display Code</router-link>
-                </div>
 
-            </div>
 
-            
-            <!-- uplaod button -->
-             <div class="navbar-end">
-                 <button class="button" v-on:click="updateSave()">Save</button>
-
-                 <!-- save button -->
-                     <div id="Exporting" class="file has-name" type="file">
-                        <label class="file-label">
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-download"></i>
-                                </span>
-                                <span class="file-label">
-                                    Export
-                                </span>
-                            </span>
-                        </label>  
+                    <div class="button is-dark">
+                        <router-link to="/display" class="has-text-white" v-on:click="updateSave()">Display Code</router-link>
                     </div>
 
-                    <div id="file-import" class="file has-name" type="file">
-                        <label class="file-label">
-                            <input class="file-input" type="file" name="resume" >
-                            <span class="file-cta">
-                                <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                Choose a file…
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-   
-            </div>
-            
-            <div id="myModal" class="modal">
-                <div class="modal-content" id="content">
-                    <input class="input" type="text" id="usergiven_filename">
-                    <button class="button" type="save" id="save">Save</button>
-                    <button class="button" id="cancel">Cancel</button>
                 </div>
+                
+                <div id="myModal" class="modal">
+                    <div class ="modalPosition">
+                    <div class="modal-content" id="content">
+                        <input class="input" type="text" id="usergiven_filename" placeholder="File Name">
+                        <div id= "exportButtons">
+                            <button class="button is-success" type="save" id="save">Save</button>
+                            <button class="button" id="cancel">Cancel</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div id="NewModal" class="modal">
+                     <div class ="modalPosition">
+                    <div class="modal-content" id="content">
+                        <p class="title">Alert!</p>
+                         <p class="subtitle" id="newFileMessage">By accepting this all work that has not been exported will be erased!</p>
+                        
+                       <button class="button is-danger"  id="acceptNewFile">Accept</button> 
+                       <button class="button"  id="cancelNewFile">Cancel</button> 
+                    </div>
+                     </div>
+                </div>
+                
+
             </div>
-            
+        </nav>
 
-        </div>
-    </nav>
-
+    </div>
 
 </template>
 <script>
@@ -317,13 +373,23 @@
     
   export default({
       
-      mounted :function(){
-          this.importFile();
-          this.exportFile(); 
-          this.features();   
-          
-          },
+    mounted :function(){
+        this.importFile();
+        this.exportFile(); 
+        this.features();
+        this.mobilejs();
+        this.newFile();   
+        
+        },
+    computed:{
+            navType(){
+                console.log(this.$store.state.navType)
+                return this.$store.state.navType;
+            }
+
+        },
       methods: {
+          //import file
           importFile(){
                 const fileInput = document.querySelector('#file-import input[type=file]');
                 fileInput.onchange = () => {
@@ -340,10 +406,11 @@
                   
                     console.log(fileInput.files[0].name);
                 }
-            },
+        },
+        //export File
         exportFile(){
-            const testButton = document.querySelector('#Exporting');
-            testButton.onclick = () => {
+            const exportingButton = document.querySelector('#Exporting');
+            exportingButton.onclick = () => {
                 var modal = document.getElementById("myModal");
                 var save = document.getElementById("save");
                 var cancel = document.getElementById("cancel");
@@ -354,13 +421,69 @@
                     modal.style.display = "none";
                 }
                 save.onclick = function(){
-                    
+                     var styleSheet = `#import_box h1 {
+                                        font-size: 2em;
+                                        font-weight: bold;
+                                    }
+                                    #import_box *:hover {
+                                        border: 1px solid black;
+                                        border-radius: 5px;
+                                    }
+                                    #import_box * {
+                                        border: 1px solid transparent;
+                                        margin-top: 0.5rem;
+                                        margin-bottom: 0.5rem;
+                                        word-wrap: break-word;
+                                    }
+
+                                    /* This class hides an element when it is being edited*/
+                                    .hidden {
+                                        display: none;
+                                    }
+                                    /* These classes are used to align text */
+                                    .align-left {
+                                        text-align: left;
+                                    }
+                                    .align-centre {
+                                        text-align: center;
+                                    }
+                                    .align-right {
+                                        text-align: right;
+                                    }
+                                    /* This class is used to expand the navbar section when the user inputs a link */
+                                    .expand-link {
+                                        width: 35rem;
+                                    }
+                                    /* These classes are used to size different images */
+                                    .Small {
+                                        width: 33.33%;
+                                        height: auto;
+                                    }
+                                    .Medium {
+                                        width: 66.66%;
+                                        height: auto;
+                                    }
+                                    .Large {
+                                        width: 100%;
+                                        height: auto;
+                                    }
+                                    /* These classes are used to change the font of an element */
+                                    .bold-font {
+                                        font-weight: bold;
+                                    }
+                                    .italic-font {
+                                        font-style: italic;
+                                    }
+                                    .underline-font {
+                                        text-decoration: underline;
+                                    }
+                                    `;
                     const fileInput = document.querySelector("#import_box");
                     var fileName = document.getElementById("usergiven_filename");
                   
                     console.log(fileInput.innerHTML);
                     var button = document.createElement("a");
-                    button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML));
+                    button.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileInput.innerHTML + "<style>" +styleSheet + "</style>"));
                     button.setAttribute('download',fileName.value+".html");
                     button.click();
                     
@@ -370,13 +493,39 @@
             
             }
         },
-        updateSave(){
-           
-            console.log("testuing");
+
+        //Create new File
+        newFile(){
+            const newFileButton = document.querySelector('#NewFile');
+            newFileButton.onclick = () => {
+                console.log("Is this button being pressed?")
+                var modal = document.getElementById("NewModal");
+                var accept = document.getElementById("acceptNewFile");
+                var cancel = document.getElementById("cancelNewFile");
+                modal.setAttribute("class","modal is-active");
+                modal.style.display = "block";
+                
+                cancel.onclick = function(){
+                    modal.style.display = "none";
+                }
+                accept.onclick = () => {
+                    const workspace = document.querySelector("#import_box");
+                    workspace.innerHTML = " ";
+                    this.updateSave();
+                    modal.style.display = "none";
+                } 
+                }
+            
+            
+
+        },
+
+        //save file
+        updateSave(){ 
             const fileInput = document.querySelector("#import_box");
             this.$store.commit('setCode',fileInput.innerHTML);
-            
         },
+
         features(){
              // Adding the new element that was clicked from the bulma navbar menu. If there
         // is a current element selected, append the new element underneath the current
@@ -400,6 +549,12 @@
                 $(`#${currentElement}`).remove();
                 currentElement = '';
             }
+        });
+        $('#Colorchanger').change(function(){
+            console.log($('#Colorchanger').val());
+            var color = $('#Colorchanger').val();
+            $(`#${currentElement}`).removeClass('current');
+            $(`#${currentElement}`).css('background' ,color);
         });
         // Align the selected element's text when one of the options under align is
         // selected in the builder navbar
@@ -553,6 +708,20 @@
 
 
         }
+
+        },
+        mobilejs(){
+            // import jQuery from "jquery";
+            $(".navbar-burger").click(function() {
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+            // $(".navbar-end").toggleClass("is-active");
+            });
+            // $(".navbar-end").toggleClass("is-active");
+        },
+
       }
   })
    
@@ -629,16 +798,20 @@
 
 .modal {
   background-color: rgba(0, 0, 0, 0.4);
+ 
 
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 15% auto ;
   padding: 20px;
   width: 80%;
   border-radius: 10px;
-  
+}
+
+.modalPosition{
+    margin-top: -14%;
 }
 
 #content{
@@ -646,9 +819,35 @@
 }
 
 #file-import{
+    margin:0;
     margin-right: 7px;  
 }
-#Exporting, .button{
-    margin-right: 7px;
+#Exporting, #file-import{
+    /* margin:0; */
+    /* margin-right: 7px; */
+    margin-top:auto;
+    margin-bottom:auto;
+    /* margin-top:auto%; */
 }
+
+#exportButtons{
+    margin-top: 10px;
+}
+
+#cancelNewFile{
+    margin-left: 15px;
+}
+
+#cancel{
+    margin-left: 15px;
+}
+
+.button{
+    color: white;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+/* #Exporting{
+    background-color:black;
+} */
 </style>

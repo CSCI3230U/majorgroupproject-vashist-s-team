@@ -77,7 +77,10 @@ export default{
                         console.log("hi");
                     }else{
                         sessionStorage.setItem("token",response["data"]);
+                        sessionStorage.setItem("type",true);
+                        this.$store.commit('setNavTrue');
                         this.$store.commit('setToken',response["data"]);
+                     
                         this.$router.push('/builderPage');
 
                     }
