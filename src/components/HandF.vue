@@ -15,6 +15,7 @@
                     <div class="navbar-item">
                         <div v-if="userToken">
                             <router-link to="/stats" class="button is-light mx-3">Statistics</router-link>
+                            <router-link to="/builderPage" class="button is-light mx-3">Builder Page</router-link>
 
                             <div class="button" v-on:click="logout()">
                                 Logout
