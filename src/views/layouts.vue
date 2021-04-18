@@ -266,6 +266,54 @@
         // Generating the new plot and adding it to the building space
         Plotly.newPlot(document.querySelector(`#div${count}`), data, layout);
     }
+
+    // A function that will append a 2D scatter plot to the building space through
+    // the use of Plotly
+    function add3DPlot(newTitle, xVals, yVals, zVals, newID, currentElement) {
+
+        // Adding a new div for the chart
+        addElement('div', 'div', newID, currentElement);
+
+        // Converting the x, y and z input values to arrays
+        var xArray = xVals.split(',').map(x => +x);
+        var yArray = yVals.split(',').map(x => +x);
+        var zArray = zVals.split(',').map(x => +x);
+
+        // Using the new x and y arrays to map the data points
+        var datapoints = {
+            x: xArray,
+            y: yArray,
+            z: zArray,
+            mode: 'markers',
+            marker: {
+                size: 12,
+                line: {
+                    color: 'rgb(204, 204, 204)',
+                    width: 1
+                },
+                opacity: 0.8
+            },
+            type: 'scatter3d'
+        };
+
+        // Setting the chart title
+        var layout = {
+            margin: {
+                l: 0,
+                r: 0,
+                b: 0,
+                t: 0
+            }
+        };
+
+        // Setting a data variable which contains the data points, which will be used in the
+        // new plot generation
+        var data = [datapoints];
+
+        // Generating the new plot and adding it to the building space
+        Plotly.newPlot(document.querySelector(`#div${count}`), data, layout);
+    }
+
     
   export default({
       
@@ -436,7 +484,7 @@
             }
         });
 
-        // Stuff here
+        // Adding a new chart from the bulma navbar menu based on the selected chart
         $('#charts a').click(function() {
             // Checking to see if the element has already been clicked. If the element
             // has been clicked, wait until the new photo is added to the builder page
@@ -454,17 +502,27 @@
                 $('#new-chart-link').addClass('expand-link');
 
                 // Adding a new input field inside the navbar item for the user to enter
-                // their image url
+                // their datapoints when they implement a chart
                 $(this).html('');
-                $(this).append('Title: <input id="tempTitleInput" class="input is-small" type="text" placeholder="Enter Title">');
+
+                // Appending the title input field
+                if (parentID != 'scatter-plot-3d') {
+                    $(this).append('Title: <input id="tempTitleInput" class="input is-small" type="text" placeholder="Enter Title">');
+                }
+
+                // Appending the x and y input fields
                 $(this).append('x-values: <input id="tempXInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
                 $(this).append('y-values: <input id="tempYInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
 
+                // Appending the z input field if the user selects the 3D scatter plot
                 if (parentID == 'scatter-plot-3d') {
                     $(this).append('z-values: <input id="tempZInput" class="input is-small" type="text" placeholder="Usage: 1,2,3,4,...">');
                 }
+
+                // Appending the button that when clicked, will dynamically generate the chart
                 $(this).append('<button id="tempChartButton" class="button is-small">Generate</button>');
 
+                // When the dynamic button is clicked, call the function that will generate the corresponding chart
                 $(document).on('click', '#tempChartButton', function() {
                     let title = $('#tempTitleInput').val()
                     let x = $('#tempXInput').val();
@@ -478,34 +536,17 @@
                         count++;
                         addBarChart(title, x, y, count, currentElement);
                     }
+                    else if (parentID == 'scatter-plot-3d') {
+                        let z = $('#tempZInput').val();
+                        count++;
+                        add3DPlot(title, x, y, z, count, currentElement);
+                    }
 
+                    // Setting the navbar back to normal
                     $('#new-chart-link').removeClass('expand-link');
                     $(`#${parentID}`).html(currentHTML);
                     $(`#${parentID}`).removeClass('clicked wrap-text');
                 });
-                
-                // When enter is pressed, create the new image based on the selected size
-                // $(this).keypress(function(key) {
-                //     let keyPressed = key.which;
-                //     if ((keyPressed == 13) && (typeof $(this).children().val() !== 'undefined')) {
-                //         console.log($(this).children().val());
-                //         let url = $(this).children().val();
-                //         count++;
-                //         addImage(currentHTML, url, count, currentElement);
-                //         $('#new-image-link').removeClass('expand-link');
-                //         $(this).html(currentHTML);
-                //         $(this).removeClass('clicked');
-                //     }
-                //     else if (keyPressed == 13) {
-                //         $('#new-image-link').removeClass('expand-link');
-                //         $(this).html(currentHTML);
-                //         $(this).removeClass('clicked');
-                //     }
-                // });
-
-
-
-
             }
         });
 
