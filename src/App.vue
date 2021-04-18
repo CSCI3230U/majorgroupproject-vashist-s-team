@@ -53,7 +53,7 @@ body{
     margin:0!important;
     height:100%!important;
     overflow: hidden!important;
-    background-color:blanchedalmond!important;
+    background-color:rgb(206, 206, 206)!important;
 
 }
 </style>
