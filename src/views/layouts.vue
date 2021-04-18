@@ -108,7 +108,20 @@
                         </a>
 
                         <div id="new" class="navbar-dropdown ">
-                            <!-- has-name is-dark has-text-warning -->
+
+                            <div class = "navbar-item">
+                                <div id="NewFile" class="file is-white" type="file">
+                                    <label class="file-label">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-file"></i>
+                                            </span>
+                                            <span class="file-label">New File</span>
+                                        </span>
+                                    </label>  
+                                </div> 
+                            </div>
+
                             <div class = "navbar-item">
                                 <div id="Exporting" class="file is-white" type="file">
                                     <label class="file-label">
@@ -135,37 +148,38 @@
                                     </label>
                                 </div>
                             </div>
-
-                        
-
                         </div>
-                        
-                        
-
-
                     </div>
 
-
-                    <!-- <button class="button" v-on:click="updateSave()">Save</button> -->
 
                     <div class="button is-dark">
                         <router-link to="/display" class="has-text-white" v-on:click="updateSave()">Display Code</router-link>
                     </div>
 
-                    
-
-                    <!-- save button -->
-                    
-
-                    
                 </div>
                 
                 <div id="myModal" class="modal">
+                    <div class ="modalPosition">
                     <div class="modal-content" id="content">
-                        <input class="input" type="text" id="usergiven_filename">
-                        <button class="button" type="save" id="save">Save</button>
-                        <button class="button" id="cancel">Cancel</button>
+                        <input class="input" type="text" id="usergiven_filename" placeholder="File Name">
+                        <div id= "exportButtons">
+                            <button class="button is-success" type="save" id="save">Save</button>
+                            <button class="button" id="cancel">Cancel</button>
+                        </div>
                     </div>
+                    </div>
+                </div>
+
+                <div id="NewModal" class="modal">
+                     <div class ="modalPosition">
+                    <div class="modal-content" id="content">
+                        <p class="title">Alert!</p>
+                         <p class="subtitle" id="newFileMessage">By accepting this all work that has not been exported will be erased!</p>
+                        
+                       <button class="button is-danger"  id="acceptNewFile">Accept</button> 
+                       <button class="button"  id="cancelNewFile">Cancel</button> 
+                    </div>
+                     </div>
                 </div>
                 
 
@@ -227,7 +241,8 @@
         this.importFile();
         this.exportFile(); 
         this.features();
-        this.mobilejs();   
+        this.mobilejs();
+        this.newFile();   
         
         },
     computed:{
@@ -238,6 +253,7 @@
 
         },
       methods: {
+          //import file
           importFile(){
                 const fileInput = document.querySelector('#file-import input[type=file]');
                 fileInput.onchange = () => {
@@ -254,10 +270,11 @@
                   
                     console.log(fileInput.files[0].name);
                 }
-            },
+        },
+        //export File
         exportFile(){
-            const testButton = document.querySelector('#Exporting');
-            testButton.onclick = () => {
+            const exportingButton = document.querySelector('#Exporting');
+            exportingButton.onclick = () => {
                 var modal = document.getElementById("myModal");
                 var save = document.getElementById("save");
                 var cancel = document.getElementById("cancel");
@@ -340,13 +357,39 @@
             
             }
         },
-        updateSave(){
-           
-            console.log("testuing");
+
+        //Create new File
+        newFile(){
+            const newFileButton = document.querySelector('#NewFile');
+            newFileButton.onclick = () => {
+                console.log("Is this button being pressed?")
+                var modal = document.getElementById("NewModal");
+                var accept = document.getElementById("acceptNewFile");
+                var cancel = document.getElementById("cancelNewFile");
+                modal.setAttribute("class","modal is-active");
+                modal.style.display = "block";
+                
+                cancel.onclick = function(){
+                    modal.style.display = "none";
+                }
+                accept.onclick = () => {
+                    const workspace = document.querySelector("#import_box");
+                    workspace.innerHTML = " ";
+                    this.updateSave();
+                    modal.style.display = "none";
+                } 
+                }
+            
+            
+
+        },
+
+        //save file
+        updateSave(){ 
             const fileInput = document.querySelector("#import_box");
             this.$store.commit('setCode',fileInput.innerHTML);
-            
         },
+
         features(){
              // Adding the new element that was clicked from the bulma navbar menu. If there
         // is a current element selected, append the new element underneath the current
@@ -541,16 +584,20 @@
 
 .modal {
   background-color: rgba(0, 0, 0, 0.4);
+ 
 
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 15% auto ;
   padding: 20px;
   width: 80%;
   border-radius: 10px;
-  
+}
+
+.modalPosition{
+    margin-top: -14%;
 }
 
 #content{
@@ -567,6 +614,18 @@
     margin-top:auto;
     margin-bottom:auto;
     /* margin-top:auto%; */
+}
+
+#exportButtons{
+    margin-top: 10px;
+}
+
+#cancelNewFile{
+    margin-left: 15px;
+}
+
+#cancel{
+    margin-left: 15px;
 }
 
 .button{
