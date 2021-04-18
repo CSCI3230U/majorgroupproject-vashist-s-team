@@ -69,6 +69,7 @@
                         <a class="navbar-link">
                             Font...
                         </a>
+                        
                         <div id="apply-font" class="navbar-dropdown">
                             <a id="bold-font" class="navbar-item">
                                 Bold
@@ -83,7 +84,24 @@
                             </a>                                              
                         </div>
                     </div>
-
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a id="new-chart-link" class="navbar-link">
+                            Charts...
+                        </a>
+                        <div id="charts" class="navbar-dropdown">
+                            <a id="scatter-plot-2d" class="navbar-item">
+                                Scatter Plot (2D)
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="bar-chart" class="navbar-item">
+                                Bar Chart
+                            </a>
+                            <hr class="navbar-divider">
+                            <a id="scatter-plot-3d" class="navbar-item">
+                                Scatter Plot (3D)
+                            </a>                                              
+                        </div>
+                    </div>
                     <div class="navbar-item has-dropdown is-hoverable ">
                         <a class="navbar-link">
                             Color Selector
@@ -92,9 +110,6 @@
                             <input type="color" id='Colorchanger' class="input" >                                           
                         </div>
                     </div>
-
-                    
-
                 </div>
 
                 
@@ -151,32 +166,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a id="new-chart-link" class="navbar-link">
-                        Charts...
-                    </a>
-                    <div id="charts" class="navbar-dropdown">
-                        <a id="scatter-plot-2d" class="navbar-item">
-                            Scatter Plot (2D)
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="bar-chart" class="navbar-item">
-                            Bar Chart
-                        </a>
-                        <hr class="navbar-divider">
-                        <a id="scatter-plot-3d" class="navbar-item">
-                            Scatter Plot (3D)
-                        </a>                                              
-                    </div>
+
+
+
+
+                <div class="button is-dark">
+                    <router-link to="/display" class="has-text-white" v-on:click="updateSave()">Display Code</router-link>
                 </div>
 
-
-
-                    <div class="button is-dark">
-                        <router-link to="/display" class="has-text-white" v-on:click="updateSave()">Display Code</router-link>
-                    </div>
-
-                </div>
                 
                 <div id="myModal" class="modal">
                     <div class ="modalPosition">
@@ -707,8 +704,6 @@
 
 
 
-        }
-
         },
         mobilejs(){
             // import jQuery from "jquery";
@@ -720,10 +715,10 @@
             // $(".navbar-end").toggleClass("is-active");
             });
             // $(".navbar-end").toggleClass("is-active");
-        },
+        }
 
       }
-  })
+  });
    
 </script>
 <style lang ="css">
