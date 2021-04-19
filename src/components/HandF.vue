@@ -19,7 +19,6 @@
 
                             <div class="button is-danger" v-on:click="logout()">
                                 Logout
-                                
                             </div>
 
 
@@ -51,14 +50,13 @@
             </div>
             <div class ="navbar-end">
                 <div class ="control is-size-5 has-icons-right my-3 mx-3" id ="FAQ">
-                    <a class ="links" id="FAQ" href="instructions.vue">
+                    <router-link to="/FAQ" class ="links" v-on:click="updateSave(); removeNav()">
                         <span class="icon-text is-small">
                             <i class ="far fa-question-circle">
-    
                             </i>
                         </span>
                         <span >FAQ</span>
-                    </a>
+                    </router-link>
                 </div>
                 <div class ="control is-size-5 has-icons-right my-3 mx-3" >
                     <a class ="links" id="twit" href="https://twitter.com" target="_blank">
@@ -140,8 +138,7 @@ export default{
             console.log("adding")
             sessionStorage.setItem("type",true);
             this.$store.commit('setNavTrue',true);
-        }         
-
+        }       
                     
     },
 

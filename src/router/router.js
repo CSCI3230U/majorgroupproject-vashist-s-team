@@ -6,6 +6,7 @@ import builderPage from '../views/builderPage.vue'
 import homepage from '../views/homepage.vue'
 import stats from '../views/stats.vue'
 import display from '../views/display.vue'
+import FAQ from '../views/FAQ.vue'
 
 const routes = [
   {
@@ -41,6 +42,11 @@ const routes = [
     path: '/stats',
     name: 'Statistics',
     component: stats
+  },
+  {
+    path: '/FAQ',
+    name: 'FAQ',
+    component: FAQ
   }
 ]
 
