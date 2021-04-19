@@ -10,10 +10,10 @@ Before you submit your project, modify the following table to include everyone's
 | Ryan Guenther | rguen |
 | Zile Humma | hummazile |
 
-## Instructions
 Everyone in the group would like to be grade the same. Everyone in the group did the same amount of work.
 We also did a lot of pair coding.
 
+## Instructions
 The objective of this project was to create a website that allows user to build a website who don't want to learn to code.
 
 Things need to be intstalled in order to run project:
