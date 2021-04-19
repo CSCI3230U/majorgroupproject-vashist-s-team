@@ -16,7 +16,7 @@
 
           <button class="question">How to align text?</button>
           <div class="answer">
-            <p>Click on "Text Align..." drop down menu and select your desired option.</p>
+            <p>Click on "Alignment" drop down menu and select your desired option.</p>
           </div>
 
           <button class="question">How to change font?</button>
@@ -38,6 +38,8 @@
           <div class="answer">
             <p>Click on the text you want to set the color of, then click "Text Colour" and pick your desired color.</p>
           </div>
+
+
 
           <button class="question">How to import a HTML template?</button>
           <div class="answer">
