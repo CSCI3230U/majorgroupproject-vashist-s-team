@@ -6,9 +6,7 @@
 
             <div id="navbarHeader" class="navbar-menu">
                 <div class="navbar-start">
-                    <a href="homePage.html">
-                        <h1 id="Zing" class="title has-text-white my-2 mx-3">Zing!</h1>
-                    </a>
+                    <router-link to="/builderPage" class="title has-text-white my-2 mx-3" v-on:click="addNav()">Zing!</router-link>
                 </div>
 
                 <div class="navbar-end">
@@ -53,7 +51,7 @@
             </div>
             <div class ="navbar-end">
                 <div class ="control is-size-5 has-icons-right my-3 mx-3" id ="FAQ">
-                    <a class ="links" id="FAQ" target="_blank">
+                    <a class ="links" id="FAQ" href="instructions.vue">
                         <span class="icon-text is-small">
                             <i class ="far fa-question-circle">
     
