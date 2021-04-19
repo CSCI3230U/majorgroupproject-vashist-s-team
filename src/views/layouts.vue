@@ -91,6 +91,12 @@
               <input type="color" id="Colorchanger" class="input" />
             </div>
           </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Text Colour </a>
+            <div id="new" class="navbar-dropdown">
+              <input type="color" id="ColourText" class="input" />
+            </div>
+          </div>
         </div>
 
         <!-- File option drop down -->
@@ -559,6 +565,13 @@ export default {
         var color = $("#Colorchanger").val();
         $(`#${currentElement}`).removeClass("current");
         $(`#${currentElement}`).css("background", color);
+      });
+
+      $("#ColourText").change(function () {
+        console.log($("#ColourText").val());
+        var color = $("#ColourText").val();
+        $(`#${currentElement}`).removeClass("current");
+        $(`#${currentElement}`).css("color", color);
       });
       // Align the selected element's text when one of the options under align is
       // selected in the builder navbar
