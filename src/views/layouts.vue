@@ -145,6 +145,7 @@
               <div class="navbar-item">
                 <div id="file-import" class="file is-white" type="file">
                   <label class="file-label">
+                    <!-- https://bulma.io/documentation/form/file/ -->
                     <input class="file-input" type="file" name="resume" />
                     <span class="file-cta">
                       <span class="file-icon">
@@ -380,7 +381,9 @@ export default {
     importFile() {
       const fileInput = document.querySelector("#file-import input[type=file]");
       //when file input gets a new value
+
       fileInput.onchange = () => {
+        // https://www.digitalocean.com/community/tutorials/vuejs-file-reader-component
         const reader = new FileReader();
         var workspace = document.querySelector("#import_box");
 
@@ -478,7 +481,6 @@ export default {
                                     }
                                     `;
           //work space id
-          
           const workspace = document.querySelector("#import_box");
           var temp = "https://cdn.plot.ly/plotly-latest.min.js"
           
@@ -821,6 +823,8 @@ export default {
         $(".navbar-menu").toggleClass("is-active");
       });
     },
+    // https://www.w3schools.com/jsref/event_onbeforeunload.asp
+    //this gives a refresh warning so you dont loose progress by acciendtly reloading
     reloadWarning(){
       window.onbeforeunload = function() {
         return "Reloading this page will lead to loosing work that has not been exported";
