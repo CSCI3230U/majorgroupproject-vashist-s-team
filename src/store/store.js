@@ -1,10 +1,19 @@
+// https://www.youtube.com/watch?v=nFh7-HfODYY
+// Link above taught us how to use vuex 
 
+//Imports for the stores from vuex
 import { createStore } from 'vuex'
+//Importing axios with also setting axios.defaults.withcredentials to true because of certain browsers
+//causing errors when it is not initailized 
 import axios from 'axios'
+axios.defaults.withCredentials = true;
 
+
+//Creating state & mutations for the store
 
 export default createStore({
   state: {
+    //Initailizing store variables
     token: sessionStorage.getItem('token'),
     name: '',
     code: '',
@@ -12,6 +21,7 @@ export default createStore({
     auth: false
   },
   mutations:{
+    //Setters for setting the store variables to a value. 
     setToken(state,tokens){
       state.token = tokens
       

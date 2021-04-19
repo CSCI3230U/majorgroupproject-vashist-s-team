@@ -1,5 +1,6 @@
 <template>
   <!-- box to display the code in -->
+  <!-- Burner code -->
   <body>
     <section class="hero has-background-link-light is-fullheight">
       <div class="box my-6 mx-5">
@@ -14,7 +15,6 @@
 // the code from the builder page is displayed
 export default {
   mounted() {
-    console.log("test1");
     const display = document.querySelector("#displayBox");
     display.textContent = this.$store.state.code;
   },

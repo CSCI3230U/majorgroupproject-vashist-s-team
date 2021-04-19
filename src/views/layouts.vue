@@ -809,14 +809,10 @@ export default {
       });
     },
     mobilejs() {
-      // import jQuery from "jquery";
       $(".navbar-burger").click(function () {
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
         $(".navbar-burger").toggleClass("is-active");
         $(".navbar-menu").toggleClass("is-active");
-        // $(".navbar-end").toggleClass("is-active");
       });
-      // $(".navbar-end").toggleClass("is-active");
     },
     reloadWarning(){
       window.onbeforeunload = function() {

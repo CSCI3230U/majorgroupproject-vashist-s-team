@@ -1,6 +1,9 @@
-
 <template>
-
+<!-- 
+ 
+    https://bulma.io/documentation/
+ 
+ -->
     <body id="loginBody">
         <nav class="navbar is-dark">
 
@@ -91,16 +94,20 @@
 
 
 <script>
+
+//Importing axios with also setting axios.defaults.withcredentials to true because of certain browsers
+//causing errors when it is not initailized 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export default{
-    // name: App
-
+    //Computed section
    computed:{
+       //userToken, used for getting the token retreived from logging
         userToken(){
             return this.$store.state.token;
         },
+       //userAuth, used for getting the account type(admin or user)
         userAuth(){
             this.$store.commit('setTest');
 
@@ -109,11 +116,12 @@ export default{
         }
 
     },
+    //methods sections
     methods:{
        async logout(){
+           //Will post to /logout and delete the session 
             await axios.post('http://localhost:4000/logout')
             .then((response)=>{
-                console.log("User logged out!");
                 sessionStorage.setItem("token",response["data"]);
                 this.$store.commit('setToken',response["data"]);
                 this.$store.commit('setCode'," ");
@@ -125,17 +133,18 @@ export default{
                 });
         },
         updateSave(){
+            //Will  save the code that is inside the builder page 
             const fileInput = document.querySelector("#import_box");
             this.$store.commit('setCode',fileInput.innerHTML);
         },
          removeNav(){
-            console.log("remving")
+            //removes the second nav when not on the builder page
             sessionStorage.setItem("type",false);
 
             this.$store.commit('setNavFalse',false);
         },
         addNav(){
-            console.log("adding")
+            //removes the second nav when not on the builder page
             sessionStorage.setItem("type",true);
             this.$store.commit('setNavTrue',true);
         }       

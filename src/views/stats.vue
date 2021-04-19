@@ -1,16 +1,20 @@
 // https://www.tutorialspoint.com/How-to-get-a-number-of-days-in-a-specified-month-using-JavaScript
+// Bulma documentation was used to help create the select
 <template>
+    <!-- Select options -->
     <section class="hero has-background-link-light is-halfheight">
         <div class="columns is-centered">
             <div class="column is-3">
                 <div class="box has-background-dark">
                     <div ref="selector">
                         <div class="select is-dark mx-1">
+                        <!-- Select for the year -->
                             <select ref="Year">
                                 <option>Year</option>
                                 <option value="2021">2021</option>
                             </select>
                         </div>
+                        <!-- Select for the month -->
                         <div class="select mx-2 is-dark">
                             <select ref="Month">
                                 <option>Month</option>
@@ -29,6 +33,7 @@
                             </select>
 
                         </div>
+                        <!-- Select for the day(will be dynamically loaded depending on the month chosen) -->
                         <div class="select mx-2 is-dark ">
                             <select ref="Day">
                                 <option>Day</option>
@@ -36,6 +41,7 @@
                             </select>
 
                         </div>
+                        <!-- Submit button -->
                         <div class="button mx-1  is-dark" v-on:click="submit()" >
                             <span>
                                 Submit
@@ -47,6 +53,7 @@
                 </div>
             </div>
         </div>
+        <!-- Graph placement with columns spacing between -->
         <div class ="columns">
             <div class ="column is-1">
 
@@ -74,11 +81,15 @@
 </template>
 
 <script>
+// importing axios
 import axios from 'axios';
 axios.defaults.withCredentials = true;
+// importing d3
+// https://dev.to/andre347/d3js-and-vuejs--30c8 link taught how to import d3 in vuejs
 import * as d3 from 'd3';
 export default{
-    // name: App
+
+    // initailizing variables
     data(){
         return{
             Year: null,
@@ -87,53 +98,60 @@ export default{
                 
         }
     },
+    // Methods section
     methods:{
+        // Makes a bargraph
         makeVisitorsBarGraph(dict){
+            // Please note this d3 bargraph code was used from Saenthuran Vignarajah's labs  which was taken from Randy Fortiers lectures!
+        // Removes any previous bar graphs 
         d3.selectAll('svg').remove();
+        // initailizing graph variables such as margin, height etc...
         const margin = 40;
         const width = 600;
         const height = 500;
         const chartWidth = width - 2 * margin;
         const chartHeight = height - 2 * margin;
-        console.log(dict);
+        // Colour scale
         const colourScale = d3.scaleLinear()
                                 .domain([2,2])
                                 .range(['#00FF00','blue']);
-        
-        const xScale = d3.scaleBand() // discrete, bucket
+        // X axis 
+        const xScale = d3.scaleBand() 
                             .domain(dict.map((data) => data.Day))
                             .range([0, chartWidth])
                             .padding(0.3);
-        
+        // Y axis
         const yScale = d3.scaleLinear()
                             .domain([0, 10000])
                             .range([chartHeight, 0]);
+        // creating svg and appending it to graphTimeSpent column 
         let svg = d3.select('.graphTimespent')
                         .append('svg')
                         
                             .attr('width', width)
                             .attr('height', height);
         
-        // title
+        // This is the title of the graph with some minor position tweeks 
         svg.append('text')
                 .attr('x', width / 2)
                 .attr('y', margin)
                 .attr('text-anchor', 'middle')
                 .text('Number of Visitors by day ');
-        //Grade on x axis
+
+        // X axis title with some minor position tweeks
         svg.append('text')
                 .attr('x', width / 2)
                 .attr('y', margin+455)
                 .attr('text-anchor', 'middle')
                 .text('Days');
+        // Y axis title with some position tweeks
         svg.append('text')
                 .attr('transform','rotate(-90)')
                 .attr('x', width-850) 
                 .attr('y', margin-35)
                 .attr('text-anchor', 'middle')
                 .text('Number of visitors');
-            
-        // create a group (g) for the bars
+        // Creating agroup g for the bar graphs
         let g = svg.append('g')
                         .attr('transform', `translate(${margin}, ${margin})`);
         // y-axis
