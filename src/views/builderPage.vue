@@ -2,8 +2,8 @@
   <!-- box to build the website in -->
   <div>
     <section class="hero has-background-link-light is-fullheight">
-      <div class="box my-5 mx-4">
-        <div class="section is-large my-6" id="import_box"></div>
+      <div class="box my-6 mx-5">
+        <div class="hero is-halfheight my-6" id="import_box"></div>
       </div>
     </section>
   </div>

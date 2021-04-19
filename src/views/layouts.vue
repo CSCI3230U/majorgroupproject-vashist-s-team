@@ -772,12 +772,15 @@ export default {
 /* These classes are used to align text */
 .align-left {
   text-align: left;
+  float:left
 }
 .align-centre {
   text-align: center;
+
 }
 .align-right {
   text-align: right;
+  float:right;
 }
 /* This class is used to expand the navbar section when the user inputs a link */
 .expand-link {
@@ -785,15 +788,15 @@ export default {
 }
 /* These classes are used to size different images */
 .Small {
-  width: 33.33%;
+  width: 10.0%;
   height: auto;
 }
 .Medium {
-  width: 66.66%;
+  width: 20.0%;
   height: auto;
 }
 .Large {
-  width: 100%;
+  width: 30.0%;
   height: auto;
 }
 /* These classes are used to change the font of an element */

@@ -13,12 +13,7 @@
 
     </div>
   </body>
-  <body>
-    
-    <div class="section is-large my-6">
-    </div>
-    
-  </body>
+
 </template>
 
 
