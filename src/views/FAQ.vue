@@ -4,19 +4,54 @@
       <div class="box my-6 mx-5">
         <section class="section is-large my-6" id="faq_box">
   
-          <button class="question">q1</button>
+          <button class="question">How to add new text feilds?</button>
           <div class="answer">
-            <p>Lorem iadsfasfasfasfdafdas</p>
+            <p>Click on "Add New..." drop down menu and here you can select the type of text feild you want to add.</p>
           </div>
 
-          <button class="question">q2</button>
+          <button class="question">How to add new images?</button>
           <div class="answer">
-            <p>Lorem Lorem iadsfasfasfasfdafdas</p>
+            <p>Click on "New Image..." drop down menu, then select on the size you would like your image to be, paste the url of the image and press enter.</p>
           </div>
 
-          <button class="question">q3</button>
+          <button class="question">How to align text?</button>
           <div class="answer">
-            <p>Lorem Lorem iadsfasfasfasfdafdas</p>
+            <p>Click on "Text Align..." drop down menu and select your desired option.</p>
+          </div>
+
+          <button class="question">How to change font?</button>
+          <div class="answer">
+            <p>First select the text feild of which you want to change the font. Then click on "Font..." drop down mene and select you desired option.</p>
+          </div>
+
+          <button class="question">How to add charts?</button>
+          <div class="answer">
+            <p>Click on "Charts..." dropdown menu and select the type of chart you want. Then input the chart title and data.</p>
+          </div>
+
+          <button class="question">How to change the background colour for text feild?</button>
+          <div class="answer">
+            <p>Click on the text you want of which you want to change the backgroud of, then click "Color Selector" and pick your desired color.</p>
+          </div>
+
+          <button class="question">How to change the text colour?</button>
+          <div class="answer">
+            <p>Click on the text you want to set the color of, then click "Text Colour" and pick your desired color.</p>
+          </div>
+
+          <button class="question">How to import a HTML template?</button>
+          <div class="answer">
+            <p>Click "File" then "Choose a File" and select your desired file.</p>
+          </div>
+
+          <button class="question">How to save your file?</button>
+          <div class="answer">
+            <p>Click "File" then "Export", give your file a name and click "save".</p>
+          </div>
+
+          <button class="question">How can I check the code for my website?</button>
+          <div class="answer">
+            <p>Click on "Display Code" button.</p>
           </div>
 
         </section>
@@ -83,6 +118,8 @@ export default {
   background-color: white;
   display: none;
   overflow: hidden;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 
 </style>
