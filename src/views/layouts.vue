@@ -396,11 +396,12 @@ export default {
 
 
     //export File
-    exportFile() {
+  exportFile() {
       const exportingButton = document.querySelector("#Exporting");
       
       //export button action
       exportingButton.onclick = () => {
+    
         //set variables to ids  
         var modal = document.getElementById("exportModal");
         var save = document.getElementById("save");
@@ -417,6 +418,7 @@ export default {
 
         //save button function
         save.onclick = function () {
+            
           //string of css that needs to be exported 
           var styleSheet = `#import_box h1 {
                                         font-size: 2em;
@@ -476,19 +478,24 @@ export default {
                                     }
                                     `;
           //work space id
+          
           const workspace = document.querySelector("#import_box");
-
+          var temp = "https://cdn.plot.ly/plotly-latest.min.js"
+          
+          //https://stackoverflow.com/questions/1659749/script-tag-in-javascript-string
+          var header = "<html><head><script src="+ temp + "></"+"script></head><body>";
           //chosen file name
           var fileName = document.getElementById("usergiven_filename");
-
+          
          //create an export file
+         //https://www.geeksforgeeks.org/how-to-trigger-a-file-download-when-clicking-an-html-button-or-javascript/
           var exporter = document.createElement("a");
          //set export attributes
           exporter.setAttribute(
             "href",
             "data:text/plain;charset=utf-8," +
-              encodeURIComponent(
-                workspace.innerHTML + "<style>" + styleSheet + "</style>"
+              encodeURIComponent( header+
+                workspace.innerHTML + "</body>" +"<style>" + styleSheet + "</style>" + "</html>"
               )
           );
           //make exporter file downloadable
