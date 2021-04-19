@@ -1,3 +1,4 @@
+//Importing create app from vue, app, router & store,  and includin require for the bulma
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/router'

@@ -34,11 +34,14 @@ axios.post('http://localhost:4000/traffic',{
 
 
 export default {
+  //Computed section
     computed:{
+      //For getting the user token
       userToken(){
           return this.$store.state.token;
       }
   },
+  //Importing components
   components:{HandF, functionLayout},
   name: 'App'
 }
