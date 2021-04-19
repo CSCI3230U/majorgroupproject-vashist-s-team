@@ -104,7 +104,8 @@ export default {
 .instruction{
   height:45rem;
   width:auto;
-  margin-left:10%;
+  /* margin-left:10%; */
+  text-align: center;
 }
 .box {
   width: 98%;
