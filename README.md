@@ -10,7 +10,7 @@ Before you submit your project, modify the following table to include everyone's
 | Ryan Guenther | rguen |
 | Zile Humma | hummazile |
 
-## Intructions
+## Instructions
 Everyone in the group would like to be grade the same. Everyone in the group did the same amount of work.
 We also did a lot of pair coding.
 
