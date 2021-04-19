@@ -56,7 +56,8 @@ app.post('/signup', function(request,response){
                     email: request.body.email,
                     name: request.body.name,
                     Address: request.body.address,
-                    password: request.body.password
+                    password: request.body.password,
+                    Admin: false
         
                 });
         
@@ -87,8 +88,18 @@ app.post('/login', function(request,response){
     .then((data) =>{
         request.session.start= (new Date()).getTime();
         console.log(request.session.start);
-        console.log("It connected");
-        response.json(data[0]['_id']);
+        console.log("Starts here");
+        console.log(data)
+        if(data[0]['Admin']){
+            request.session.Admin = data[0]['Admin'];
+        }
+        request.session.Admin = data[0]['Admin'];
+        request.session.newData = {
+            '_id':data[0]['_id'],
+            'Auth':data[0]['Admin']
+        }
+        console.log(request.session.newData);
+        response.json(request.session.newData);
     })
     .catch((error) =>{
         console.log('error: ',error)
@@ -185,6 +196,13 @@ app.post('/logout',function(request,response){
 
 
 });
+
+
+app.get('/verifyIfAdmin',function(request,response){
+    console.log(request.session.Admin);
+    response.json(request.session.Admin)
+
+})
 
 app.listen(port, ()=>{  
 

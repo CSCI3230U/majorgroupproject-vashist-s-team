@@ -53,13 +53,14 @@ export default{
     data(){
         return{
             Email: '',
-            Password: ''
+            Password: '',
+            auth:''
                 
         }
     },computed:{
         userInfo(){
             return this.$store.state.token;
-        }
+        },
 
     },methods: {
         async sendInfo(){
@@ -76,10 +77,13 @@ export default{
                         this.$refs.error.innerText = response["data"]["error"];
                         console.log("hi");
                     }else{
-                        sessionStorage.setItem("token",response["data"]);
+                        console.log(response["data"])
+                        console.log(response["data"]['Auth'])
+                        sessionStorage.setItem("token",response["data"]['_id']);
                         sessionStorage.setItem("type",true);
                         this.$store.commit('setNavTrue');
-                        this.$store.commit('setToken',response["data"]);
+                        this.$store.commit('setToken',response["data"]['_id']);
+                        this.$store.commit('setTest');
                      
                         this.$router.push('/builderPage');
 

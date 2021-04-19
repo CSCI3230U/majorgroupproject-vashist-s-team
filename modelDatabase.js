@@ -20,7 +20,9 @@ const dbSchema = new Schema({
     email: String,
     name: String,
     Address: String,
-    password: String
+    password: String,
+    Admin: Boolean
+
     
 },{
     collection: 'userInfo'
@@ -31,7 +33,7 @@ const dbStats = new Schema({
     day: Number,
     month: Number,
     timeSpent: Number,
-    visitors: Number
+    visitors: Number,
 
 },{
     collection: 'dbStats'

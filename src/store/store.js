@@ -1,12 +1,15 @@
 
 import { createStore } from 'vuex'
+import axios from 'axios'
+
 
 export default createStore({
   state: {
     token: sessionStorage.getItem('token'),
     name: '',
     code: '',
-    navType: sessionStorage.getItem('type')
+    navType: sessionStorage.getItem('type'),
+    auth: false
   },
   mutations:{
     setToken(state,tokens){
@@ -24,6 +27,21 @@ export default createStore({
     },
     setNavFalse(state){
       state.navType = false;
+    },
+    setAuth(state,value){
+      state.auth = value
+    },
+    setTest(state){
+      axios.get('http://localhost:4000/verifyIfAdmin')
+        .then((response)=>{
+          state.auth = response['data']
+        })
+        .catch((error)=>{
+          console.log(error)
+        })
+      }
+    
+    
+      
     }
-  }
 })

@@ -31,6 +31,8 @@ axios.post('http://localhost:4000/traffic',{
 })
 
 
+
+
 export default {
     computed:{
       userToken(){

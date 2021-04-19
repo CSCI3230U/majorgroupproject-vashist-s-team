@@ -14,8 +14,10 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div v-if="userToken">
-                            <router-link to="/stats" class="button is-dark mx-3" v-on:click="updateSave(); removeNav()">Statistics</router-link>
+                            <router-link v-if="userAuth" to="/stats" class="button is-dark mx-3" v-on:click="updateSave(); removeNav()">Statistics</router-link>
+
                             <router-link to="/builderPage" class="button is-dark mx-3" v-on:click="addNav()">Builder Page</router-link>
+
 
                             <div class="button is-danger" v-on:click="logout()">
                                 Logout
@@ -102,6 +104,12 @@ export default{
    computed:{
         userToken(){
             return this.$store.state.token;
+        },
+        userAuth(){
+            this.$store.commit('setTest');
+
+            console.log(this.$store.state.auth)
+            return this.$store.state.auth;
         }
 
     },
