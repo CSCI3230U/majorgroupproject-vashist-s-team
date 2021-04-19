@@ -46,7 +46,7 @@
 
           <!-- Text Align drop down -->
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Text Align... </a>
+            <a class="navbar-link"> Alignment </a>
             <div id="align" class="navbar-dropdown">
               <a id="align-left" class="navbar-item"> Left </a>
               <hr class="navbar-divider" />
@@ -238,6 +238,8 @@ function addImage(size, url, newID, currentElement) {
   image.src = url;
   image.id = `image${newID}`;
   image.className = `image ${size}`;
+  
+  
   // If there is an element currently selected, append the image after the
   // currently selected element. Otherwise, append the image to the bottom
   // of the page
@@ -591,10 +593,63 @@ export default {
       // Align the selected element's text when one of the options under align is
       // selected in the builder navbar
       $("#align a").click(function () {
+
+        //check if current element is an image
+        if(($(`#${currentElement}`)).hasClass("image") == true){
+          
+          //if align left
+          if($(this).attr("id")=="align-left"){
+            //translate to the left
+            ($(`#${currentElement}`)).css("margin-left", "0%");
+            
+          //if centered  
+          }else if($(this).attr("id")=="align-centre"){
+            //check if it's a small image
+            if(($(`#${currentElement}`).attr("class")) == "image Small current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "45%");
+              
+            //check if its a medium image
+            }else if (($(`#${currentElement}`).attr("class")) == "image Medium current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "40%");
+           
+            //check if its a large image
+            }else if (($(`#${currentElement}`).attr("class")) == "image Large current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "35%");
+            }
+          
+          //if align-right
+          }else if($(this).attr("id")=="align-right"){
+            //check if it's a small image
+            if(($(`#${currentElement}`).attr("class")) == "image Small current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "90%");
+              
+            //check if its a medium image
+            }else if (($(`#${currentElement}`).attr("class")) == "image Medium current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "80%");
+           
+            //check if its a large image
+            }else if (($(`#${currentElement}`).attr("class")) == "image Large current"){
+              //translate to the left
+              ($(`#${currentElement}`)).css("margin-left", "70%");
+            }
+          }
+
+        //align any other element
+        }else{
         $(`#${currentElement}`).removeClass(
           "align-left align-centre align-right SBS"
         );
         $(`#${currentElement}`).addClass($(this).attr("id"));
+        }
+
+        
+
+
       });
       // Apply the specified font to the selected element
       $("#apply-font a").click(function () {
