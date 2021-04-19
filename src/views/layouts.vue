@@ -53,6 +53,8 @@
               <a id="align-centre" class="navbar-item"> Centre </a>
               <hr class="navbar-divider" />
               <a id="align-right" class="navbar-item"> Right </a>
+              <hr class="navbar-divider" />
+              <a id="SBS" class="navbar-item"> Side by Side </a>
             </div>
           </div>
 
@@ -97,6 +99,12 @@
               <input type="color" id="ColourText" class="input" />
             </div>
           </div>
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link"> Side By Side </a>
+            <div id="new" class="navbar-dropdown">
+              <input type="color" id="SBS" class="input" />
+            </div>
+          </div> -->
         </div>
 
         <!-- File option drop down -->
@@ -573,11 +581,15 @@ export default {
         $(`#${currentElement}`).removeClass("current");
         $(`#${currentElement}`).css("color", color);
       });
+      // $("#SBS").change(function () {
+      //   $(`#${currentElement}`).removeClass("current");
+      //   $(`#${currentElement}`).css("display:inline-block");
+      // });
       // Align the selected element's text when one of the options under align is
       // selected in the builder navbar
       $("#align a").click(function () {
         $(`#${currentElement}`).removeClass(
-          "align-left align-centre align-right"
+          "align-left align-centre align-right SBS"
         );
         $(`#${currentElement}`).addClass($(this).attr("id"));
       });
@@ -785,7 +797,6 @@ export default {
 /* These classes are used to align text */
 .align-left {
   text-align: left;
-  float:left
 }
 .align-centre {
   text-align: center;
@@ -793,7 +804,10 @@ export default {
 }
 .align-right {
   text-align: right;
-  float:right;
+}
+.SBS{
+  float:left
+
 }
 /* This class is used to expand the navbar section when the user inputs a link */
 .expand-link {

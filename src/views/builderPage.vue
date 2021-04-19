@@ -3,7 +3,7 @@
   <div>
     <section class="hero has-background-link-light is-fullheight">
       <div class="box my-6 mx-5">
-        <div class="hero is-halfheight my-6" id="import_box"></div>
+        <section class="section is-large my-6" id="import_box"></section>
       </div>
     </section>
   </div>
