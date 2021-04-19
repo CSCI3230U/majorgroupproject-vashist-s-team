@@ -112,6 +112,7 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link"> File </a>
 
+            <!-- https://bulma.io/documentation/form/file/ -->
             <!-- create New File button -->
             <div id="new" class="navbar-dropdown">
               <div class="navbar-item">
@@ -165,6 +166,7 @@
           <router-link to="/display" class="has-text-white" v-on:click="updateSave()">Display Code</router-link>
         </div>
 
+        <!-- https://bulma.io/documentation/components/modal/ -->
         <!-- modal for exporting file -->
         <div id="exportModal" class="modal">
           <div class="modalPosition">
