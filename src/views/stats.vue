@@ -66,10 +66,13 @@
             <div class ="column is-1">
 
             </div>
-            <div class ="column mx-5 is-5">
-                <div class ="graphTimespent">
+            <div class ="column mx-1 is-4">
+                <div id ="graphTimespent">
 
                 </div>
+            </div>
+            <div class ="column is-1">
+
             </div>
         </div>
 
@@ -81,11 +84,14 @@
 </template>
 
 <script>
+import Plotly from "plotly.js/dist/plotly";
+
 // importing axios
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 // importing d3
 // https://dev.to/andre347/d3js-and-vuejs--30c8 link taught how to import d3 in vuejs
+// https://plotly.com/javascript/line-charts/
 import * as d3 from 'd3';
 export default{
 
@@ -125,7 +131,7 @@ export default{
                             .domain([0, 10000])
                             .range([chartHeight, 0]);
         // creating svg and appending it to graphTimeSpent column 
-        let svg = d3.select('.graphTimespent')
+        let svg = d3.select('.graphVisitors')
                         .append('svg')
                         
                             .attr('width', width)
@@ -185,80 +191,45 @@ export default{
            
         },
         makeTimeSpentBarGraph(dict){
-        const margin = 40;
-        const width = 600;
-        const height = 500;
-        const chartWidth = width - 2     * margin;
-        const chartHeight = height - 2 * margin;
-        console.log(dict);
-        const colourScale = d3.scaleLinear()
-                                .domain([2,2])
-                                .range(['#00FF00','blue']);
-        
-        const xScale = d3.scaleBand() // discrete, bucket
-                            .domain(dict.map((data) => data.Day))
-                            .range([0, chartWidth])
-                            .padding(0.3);
-        
-        const yScale = d3.scaleLinear()
-                            .domain([0, 1000])
-                            .range([chartHeight, 0]);
-        let svg = d3.select('.graphVisitors')
-                        .append('svg')
-                        
-                            .attr('width', width)
-                            .attr('height', height);
-        
-        // title
-        svg.append('text')
-                .attr('x', width / 2)
-                .attr('y', margin)
-                .attr('text-anchor', 'middle')
-                .text('Number of timespent by day ');
-        //Grade on x axis
-        svg.append('text')
-                .attr('x', width / 2)
-                .attr('y', margin+455)
-                .attr('text-anchor', 'middle')
-                .text('Days');
-        svg.append('text')
-                .attr('transform','rotate(-90)')
-                .attr('x', width-850) 
-                .attr('y', margin-29)
-                .attr('text-anchor', 'middle')
-                .text('Time Spent (Minutes)');
-            
-        // create a group (g) for the bars
-        let g = svg.append('g')
-                        .attr('transform', `translate(${margin}, ${margin})`);
-        // y-axis
-        g.append('g')
-            .call(d3.axisLeft(yScale));
-        
-        // x-axis
-        g.append('g')
-            .attr('transform', `translate(0, ${chartHeight})`)
-            .call(d3.axisBottom(xScale));
-        
-        let rectangles = g.selectAll('rect')
-            .data(dict)
-            .enter()
-                .append('rect')
-                    .attr('x', (data) => xScale(data.Day))
-    // eslint-disable-next-line no-unused-vars
-                    .attr('y', (data) => chartHeight)
-                    .attr('width', xScale.bandwidth())
-    // eslint-disable-next-line no-unused-vars
-                    .attr('height', (data) => 0)
-                    .attr('fill', (data) => colourScale(data.timeSpent))
-        
-        rectangles.transition()
-            .ease(d3.easeElastic)
-            .attr('height', (data) => chartHeight - yScale(data.timeSpent))
-            .attr('y', (data) => yScale(data.timeSpent))
-            .duration(1000)
-            .delay((data, index) => index * 50);
-           
+        var xArray = []
+        var yArray = []
+        var zArray = []
+        var valuesArray = []
+    // Running a loop on the ditionary  and setting the values to the arrays
+        for(var i=0;i<dict.length;i++){
+            yArray[i] = dict[i]['Day']; 
+            xArray[i] = dict[i]['timeSpent'];
+            zArray[i] = dict[i]['visitors'];
+            valuesArray[i] = i;
+        }
+
+        //setting the datapoints
+        var datapoints = {
+            x: yArray,
+            y: xArray,
+            type:'scatter'
+        };
+                //setting the datapoints
+
+        var datapoints2 = {
+            x: yArray,
+            y: zArray,
+            type:'markers'
+        };
+        // size and title of graph
+        var layout={
+            height:500,
+            width:500,
+            title:"Time spent on website"
+        }
+
+
+        // Setting a data variable which contains the data points, which will be used in the
+        // new plot generation
+        var data = [datapoints,datapoints2]
+
+        // Generating the new plot and adding it to the building space
+        Plotly.newPlot('graphTimespent', data, layout);
            
         },
         getDays(){
