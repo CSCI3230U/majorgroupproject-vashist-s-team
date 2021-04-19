@@ -238,7 +238,9 @@ export default{
             return newDate;
         },
         submit(){
+            //Removes any graphs thats there 
             d3.selectAll('svg').remove();
+            //For getting back end statistics
             this.Year = this.$refs.Year.value;
             this.Month = this.$refs.Month.value;
             this.Day = this.$refs.Day.value;
