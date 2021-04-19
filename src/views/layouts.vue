@@ -195,6 +195,8 @@
           </div>
         </div>
 
+        
+
       </div>
     </nav>
   </div>
@@ -363,6 +365,7 @@ export default {
     this.features();
     this.mobilejs();
     this.newFile();
+    this.reloadWarning();
   },
   computed: {
     navType() {
@@ -759,6 +762,11 @@ export default {
         // $(".navbar-end").toggleClass("is-active");
       });
       // $(".navbar-end").toggleClass("is-active");
+    },
+    reloadWarning(){
+      window.onbeforeunload = function() {
+        return "Reloading this page will lead to loosing work that has not been exported";
+    };
     },
   },
 };
