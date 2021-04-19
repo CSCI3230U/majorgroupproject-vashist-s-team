@@ -139,6 +139,8 @@ export default {
   margin-top:10px;
   margin-bottom:10px;
   text-align: center;
+  font-weight:bold;
+  font-size: 20px;
 }
 
 </style>
