@@ -374,7 +374,7 @@ export default {
   },
   computed: {
     navType() {
-      console.log(this.$store.state.navType);
+      
       return this.$store.state.navType;
     },
   },
@@ -570,7 +570,7 @@ export default {
       });
       // When an element is clicked, set it to the current element
       $(document).on("click", "#import_box *", function () {
-        console.log("TEST");
+        
         $("#import_box *").removeClass("current");
         currentElement = $(this).attr("id");
         $(this).addClass("current");
@@ -585,14 +585,14 @@ export default {
         }
       });
       $("#Colorchanger").change(function () {
-        console.log($("#Colorchanger").val());
+        
         var color = $("#Colorchanger").val();
         $(`#${currentElement}`).removeClass("current");
         $(`#${currentElement}`).css("background", color);
       });
 
       $("#ColourText").change(function () {
-        console.log($("#ColourText").val());
+     
         var color = $("#ColourText").val();
         $(`#${currentElement}`).removeClass("current");
         $(`#${currentElement}`).css("color", color);
@@ -728,7 +728,7 @@ export default {
               keyPressed == 13 &&
               typeof $(this).children().val() !== "undefined"
             ) {
-              console.log($(this).children().val());
+              
               let url = $(this).children().val();
               count++;
               addImage(currentHTML, url, count, currentElement);
