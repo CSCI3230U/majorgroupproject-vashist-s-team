@@ -262,6 +262,7 @@ function add2DPlot(newTitle, xVals, yVals, newID, currentElement) {
   // Adding a new div for the chart
   addElement("div", "div", newID, currentElement);
 
+  // https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers
   // Converting the x and y input values to arrays
   var xArray = xVals.split(",").map((x) => +x);
   var yArray = yVals.split(",").map((x) => +x);
@@ -295,6 +296,7 @@ function addBarChart(newTitle, xVals, yVals, newID, currentElement) {
   // Adding a new div for the chart
   addElement("div", "div", newID, currentElement);
 
+  // https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers
   // Converting the x and y input values to arrays
   var xArray = xVals.split(",");
   var yArray = yVals.split(",").map((x) => +x);
@@ -325,6 +327,7 @@ function add3DPlot(newTitle, xVals, yVals, zVals, newID, currentElement) {
   // Adding a new div for the chart
   addElement("div", "div", newID, currentElement);
 
+  // https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers
   // Converting the x, y and z input values to arrays
   var xArray = xVals.split(",").map((x) => +x);
   var yArray = yVals.split(",").map((x) => +x);
