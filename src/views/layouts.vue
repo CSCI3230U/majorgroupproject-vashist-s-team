@@ -1,4 +1,5 @@
 <template>
+  <!-- https://bulma.io/documentation/components/navbar/ -->
   <!-- show nav bar if in builderpage or Displaycode -->
   <div v-show="navType">
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
@@ -205,9 +206,9 @@
   </div>
 </template>
 <script>
-// Importing Plotly
+// Importing Plotly -> https://plotly.com/nodejs/getting-started/
 import Plotly from "plotly.js/dist/plotly";
-// Importing jQuery
+// Importing jQuery -> https://stackoverflow.com/questions/53355086/add-jquery-to-vue-cli-3
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
@@ -228,6 +229,7 @@ function addElement(tag, name, newID, currentElement) {
   // the currently selected element. Otherwise, append the element to the
   // bottom of the page
   if (currentElement) {
+    // https://www.w3schools.com/jquery/html_insertafter.asp
     $(element).insertAfter(`#${currentElement}`);
   } else {
     document.querySelector("#import_box").appendChild(element);
@@ -247,6 +249,7 @@ function addImage(size, url, newID, currentElement) {
   // currently selected element. Otherwise, append the image to the bottom
   // of the page
   if (currentElement) {
+    // https://www.w3schools.com/jquery/html_insertafter.asp
     $(image).insertAfter(`#${currentElement}`);
   } else {
     document.querySelector("#import_box").appendChild(image);
@@ -254,7 +257,7 @@ function addImage(size, url, newID, currentElement) {
 }
 
 // A function that will append a 2D scatter plot to the building space through
-// the use of Plotly
+// the use of Plotly -> https://plotly.com/javascript/
 function add2DPlot(newTitle, xVals, yVals, newID, currentElement) {
   // Adding a new div for the chart
   addElement("div", "div", newID, currentElement);
@@ -279,7 +282,7 @@ function add2DPlot(newTitle, xVals, yVals, newID, currentElement) {
   };
 
   // Setting a data variable which contains the data points, which will be used in the
-  // new plot generation
+  // new plot generation -> https://plotly.com/javascript/
   var data = [datapoints];
 
   // Generating the new plot and adding it to the building space
@@ -317,7 +320,7 @@ function addBarChart(newTitle, xVals, yVals, newID, currentElement) {
 }
 
 // A function that will append a 2D scatter plot to the building space through
-// the use of Plotly
+// the use of Plotly -> https://plotly.com/javascript/
 function add3DPlot(newTitle, xVals, yVals, zVals, newID, currentElement) {
   // Adding a new div for the chart
   addElement("div", "div", newID, currentElement);
@@ -691,6 +694,7 @@ export default {
           tempTextArea.id = "tempArea";
           tempTextArea.className = "textarea has-fixed-size";
           // Insert the temporary textarea for editing
+          // https://www.w3schools.com/jquery/html_insertafter.asp
           $(tempTextArea).insertAfter($(this));
           // If enter is pressed, display the current element with the value from
           // the textarea, and remove the temporary textarea used for editing

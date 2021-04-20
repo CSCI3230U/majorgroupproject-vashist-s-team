@@ -43,6 +43,14 @@ Notes:
 
 _**Note:** You can delete the unused rows from the table._
 
+## Independent Study
+For our independent study, we decided to implement Plotly.js. Plotly.js is an open-source library that
+allows you to create interactive JavaScript charts, graphs, and maps. Here is a link to our slideshow
+on Plotly.js:
+https://docs.google.com/presentation/d/1J8biEC-LQxwaAXqjJTGvl6994yuR9QCTk1AqBKPT3bI/edit?usp=sharing
+
+_**Note:** If this link does not work, a copy of the slideshow can be found in the independent study folder._
+
 ## Overview
 This group project is designed for you to demonstrate the skills that you have learned in this course.  The final project that you submit in the last week of classes will be a completed web application.  Non-functional requirements, especially those associated with production-readiness, will be considered extremely important when marking this project.  You are expected to work in a group of 3-5 when completing this project.  Students will be prohibited from working alone on the project, as this eliminates one of the learning objectives of this assessment.  
 
